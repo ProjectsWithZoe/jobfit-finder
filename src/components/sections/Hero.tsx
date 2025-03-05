@@ -64,6 +64,8 @@ export function Hero() {
   };
 
   const getMatch = async () => {
+    setLoading(true);
+
     console.log("MatchMe clicked");
     try {
       const response = await fetch("/api/get_matches", {
@@ -84,6 +86,8 @@ export function Hero() {
       setError("An error occurred. Please try again.");
     } finally {
       setLoading(false);
+      setJobDescription("");
+      setCv("");
       //setJobDescription("");
       //setCv("");
       //setMatchPercentage(0);
