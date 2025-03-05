@@ -86,8 +86,7 @@ export function Hero() {
       setError("An error occurred. Please try again.");
     } finally {
       setLoading(false);
-      setJobDescription("");
-      setCv("");
+
       //setJobDescription("");
       //setCv("");
       //setMatchPercentage(0);
