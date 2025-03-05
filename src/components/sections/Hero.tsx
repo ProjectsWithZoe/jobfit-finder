@@ -51,7 +51,7 @@ export function Hero() {
       const data = await response.json();
       console.log("Raw data:", data);
       const cvSkillsArray = data.cvSkills
-        ? data.cvSkillsmap((skill) => skill.trim().toLowerCase())
+        ? data.cvSkills.map((skill) => skill.trim().toLowerCase())
         : [];
       setCvSkills(cvSkillsArray);
       console.log("Processed cv skills:", cvSkillsArray);
