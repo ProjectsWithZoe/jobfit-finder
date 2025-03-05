@@ -100,7 +100,7 @@ export function Hero() {
     }, 2000);
   };
 
-  const get_5job_recs = async () => {
+  const get_5_recs = async () => {
     setLoading(true);
     try {
       const response = await fetch("/api/get_5_recs", {
@@ -153,7 +153,7 @@ export function Hero() {
     console.log(cvSkills);
     analyzeUserCv();
     setTimeout(() => {
-      get_5job_recs();
+      get_5_recs();
     }, 2000);
     return () => {
       setMatchPercentage(0);

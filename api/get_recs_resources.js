@@ -8,12 +8,16 @@ const openai = new OpenAI(process.env.OPENAI_API_KEY);
 export default async function handler(req, res) {
   if (req.method === "POST") {
     const { cvSkills, unmatchedJobs } = req.body;
-    const prompt = `Based on the CV skills provided, recommend 10 job descriptions that match the candidate's skills. cvSKills : ${cvSkills}. Give 5 websites/resources to learn the unmatched skills. unmatchedSkills : ${unmatchedJobs}.
+    const prompt = `Analyze the given CV skills and identify 10 job roles that closely align with the candidate's skill set. Ensure the job recommendations are relevant to the industry and expertise level.  
+cvSkills: ${cvSkills}  
 
-Respond with only this JSON format:
+Provide 5 high-quality websites or resources where the candidate can learn these unmatched skills.  
+unmatchedSkills: ${unmatchedSkills}  
+
+Format the response strictly as JSON:  
 {
-  "jobRecommendations": ["job1", "job2"],
-    "learningResources": ["resource1", "resource2"]
+  "jobRecommendations": ["Job Title 1", "Job Title 2", ..., "Job Title 10"],
+  "learningResources": ["Resource URL 1", "Resource URL 2", ..., "Resource URL 5"]
 }`;
 
     const response = await openai.chat.completions.create({
