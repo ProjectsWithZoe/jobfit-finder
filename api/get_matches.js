@@ -26,6 +26,7 @@ const fuzzMatchSkills = (jobSkills, cvSkills, threshold = 0.3) => {
 export default async function handler(req, res) {
   if (req.method === "POST") {
     const { jobDescriptionSkills, cvSkills } = req.body;
+    console.log(req.body);
     const { matchedSkills, unmatchedSkills, matchPercentage } = fuzzMatchSkills(
       jobDescriptionSkills,
       cvSkills
