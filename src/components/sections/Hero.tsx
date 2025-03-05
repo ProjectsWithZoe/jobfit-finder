@@ -27,7 +27,7 @@ export function Hero() {
         skill.trim().toLowerCase()
       );
       setJobDescriptionSkills(jobSkillsArray);
-      console.log(jobSkillsArray);
+      console.log(data);
     } catch (error) {
       setError("An error occurred. Please try again.");
     }
@@ -48,7 +48,7 @@ export function Hero() {
         skill.trim().toLowerCase()
       );
       setCvSkills(cvSkillsArray);
-      console.log(cvSkillsArray);
+      console.log(data);
     } catch (error) {
       setError("An error occurred. Please try again.");
     }
