@@ -86,17 +86,15 @@ export function Hero() {
         });
 
         const data = await response.json();
-        setMatchPercentage(data["matchPercentage"]);
-        setMatchedJobs(data["matchedSkills"]);
-        setUnmatchedJobs(data["unmatchedSkills"]);
-        console.log(data["matchPercentage"]);
-        console.log(data["matchedSkills"]);
-        console.log(data["unmatchedSkills"]);
-
-        return data["unmatchedSkills"] ?? [];
+        const matchedSkills = data["matchedSkills"];
+        const unmatchedSkills = data["unmatchedSkills"];
+        const matchPercentage = data["matchPercentage"];
+        setMatchPercentage(matchPercentage);
+        setMatchedJobs(matchedSkills);
+        setUnmatchedJobs(unmatchedSkills);
+        console.log(matchedSkills, matchPercentage, unmatchedSkills);
       } catch (error) {
         setError("An error occurred. Please try again.");
-        return [];
       } finally {
         setLoading(false);
       }
