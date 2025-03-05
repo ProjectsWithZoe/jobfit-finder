@@ -98,6 +98,14 @@ export function Hero() {
     };
   }, [cv]);
 
+  useEffect(() => {
+    console.log("Updated Job Skills:", jobDescriptionSkills);
+  }, [jobDescriptionSkills]); // Runs whenever jobDescriptionSkills changes
+
+  useEffect(() => {
+    console.log("Updated CV Skills:", cvSkills);
+  }, [cvSkills]); // Runs whenever cvSkills changes
+
   /*const analyzeGetPercentage = async (jobDescription, cv) => {
     setLoading(true);
     try {
