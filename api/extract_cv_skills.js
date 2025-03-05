@@ -1,6 +1,6 @@
 import natural from "natural";
 
-skill_list = [
+const skill_list = [
   // Programming Languages
   "javascript",
   "dart",
