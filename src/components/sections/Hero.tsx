@@ -58,7 +58,7 @@ export function Hero() {
   const getMatch = async () => {
     console.log("MatchMe clicked");
     try {
-      const response = await fetch("/api/get-matches", {
+      const response = await fetch("/api/get_matches", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
