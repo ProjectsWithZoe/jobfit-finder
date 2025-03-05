@@ -65,32 +65,33 @@ export function Hero() {
 
   const getMatch = async () => {
     setLoading(true);
+    setTimeout(async () => {
+      console.log("MatchMe clicked");
+      try {
+        const response = await fetch("/api/get_matches", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            jobDescriptionSkills: jobDescriptionSkills,
+            cvSkills: cvSkills,
+          }),
+        });
 
-    console.log("MatchMe clicked");
-    try {
-      const response = await fetch("/api/get_matches", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          jobDescriptionSkills: jobDescriptionSkills,
-          cvSkills: cvSkills,
-        }),
-      });
+        const data = await response.json();
+        setMatchPercentage(data["matchPercentage"]);
+        console.log(data["matchPercentage"]);
+      } catch (error) {
+        setError("An error occurred. Please try again.");
+      } finally {
+        setLoading(false);
 
-      const data = await response.json();
-      setMatchPercentage(data["matchPercentage"]);
-      console.log(data["matchPercentage"]);
-    } catch (error) {
-      setError("An error occurred. Please try again.");
-    } finally {
-      setLoading(false);
-
-      //setJobDescription("");
-      //setCv("");
-      //setMatchPercentage(0);
-    }
+        //setJobDescription("");
+        //setCv("");
+        //setMatchPercentage(0);
+      }
+    }, 2000);
   };
 
   useEffect(() => {
