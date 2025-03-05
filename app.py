@@ -1,7 +1,5 @@
 import spacy
 from spacy.matcher import PhraseMatcher
-from flask import Flask, request, jsonify
-from flask_cors import CORS
 from rapidfuzz import fuzz, process
 from fastapi import FastAPI
 from pydantic import BaseModel
