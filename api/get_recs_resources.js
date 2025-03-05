@@ -12,7 +12,7 @@ export default async function handler(req, res) {
 cvSkills: ${cvSkills}  
 
 Provide 5 high-quality websites or resources where the candidate can learn these unmatched skills.  
-unmatchedSkills: ${unmatchedSkills}  
+unmatchedSkills: ${unmatchedJobs}  
 
 Format the response strictly as JSON:  
 {
