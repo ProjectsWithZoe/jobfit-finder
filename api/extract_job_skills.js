@@ -336,12 +336,17 @@ const extractJobSkills = (jobDescription) => {
   return jobSkills;
 };
 
-module.exports = (req, res) => {
+export default async function handler(req, res) {
   if (req.method === "POST") {
-    const { jobDescription } = req.body;
-    const jobSkills = extractJobSkills(jobDescription);
-    res.status(200).json({ skills });
+    try {
+      const { jobDescription } = req.body;
+      const jobSkills = extractJobSkills(jobDescription);
+      res.status(200).json({ jobSkills });
+    } catch (error) {
+      console.error(error);
+      res.status(500).json({ error: "Something went wrong" });
+    }
   } else {
     res.status(405).json({ error: "Method not allowed" });
   }
-};
+}
