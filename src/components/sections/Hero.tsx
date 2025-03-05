@@ -144,7 +144,7 @@ export function Hero() {
   };
 
   const handleMatches = async () => {
-    getMatch();
+    await getMatch();
     if (unmatchedJobs.length > 0) {
       get_recs_resources();
     } else {
