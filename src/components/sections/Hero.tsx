@@ -49,12 +49,15 @@ export function Hero() {
         body: JSON.stringify({ cv }),
       });
       const data = await response.json();
+      console.log("Raw data:", data);
       const cvSkillsArray = data.cvSkills
         ? data.cvSkillsmap((skill) => skill.trim().toLowerCase())
         : [];
       setCvSkills(cvSkillsArray);
-      console.log(cvSkillsArray);
+      console.log("Processed cv skills:", cvSkillsArray);
     } catch (error) {
+      console.error("Detailed error:", error);
+      console.error("Error message:", error.message);
       setError("An error occurred. Please try again.");
     }
     setLoading(false);
