@@ -3,6 +3,7 @@ import { Button } from "@/components/ui/button";
 import { AnimatedText } from "@/components/ui/AnimatedText";
 import { PercentageDisplay } from "@/components/ui/PercentageDisplay";
 import { useNavigate } from "react-router-dom";
+import { set } from "react-hook-form";
 export function Hero() {
   const [isTextareaActive, setIsTextareaActive] = useState(false);
   const [jobDescription, setJobDescription] = useState("");
@@ -12,6 +13,11 @@ export function Hero() {
   const [matchPercentage, setMatchPercentage] = useState(0);
   const [jobDescriptionSkills, setJobDescriptionSkills] = useState([]);
   const [cvSkills, setCvSkills] = useState([]);
+  const [matchedJobs, setMatchedJobs] = useState([]);
+  const [unmatchedJobs, setUnmatchedJobs] = useState([]);
+  const [fiveJobRecommendations, setFiveJobRecommendations] = useState([]);
+  const [tenJobRecommendations, setTenJobRecommendations] = useState([]);
+  const [learningResources, setLearningResources] = useState([]);
 
   const analyzeJobDesc = async () => {
     try {
@@ -81,7 +87,11 @@ export function Hero() {
 
         const data = await response.json();
         setMatchPercentage(data["matchPercentage"]);
+        setMatchedJobs(data["matchedJobs"]);
+        setUnmatchedJobs(data["unmatchedJobs"]);
         console.log(data["matchPercentage"]);
+        console.log(data["matchedJobs"]);
+        console.log(data["unmatchedJobs"]);
       } catch (error) {
         setError("An error occurred. Please try again.");
       } finally {
@@ -100,6 +110,27 @@ export function Hero() {
         },
         body: JSON.stringify({
           cvSkills: cvSkills,
+        }),
+      });
+
+      const data = await response.json();
+      console.log(data);
+    } catch (error) {
+      setError("An error occurred. Please try again.");
+    }
+  };
+
+  const get_recs_resources = async () => {
+    setLoading(true);
+    try {
+      const response = await fetch("/api/get_recs_resources", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          cvSkills: cvSkills,
+          unmatchedJobs: unmatchedJobs,
         }),
       });
 
