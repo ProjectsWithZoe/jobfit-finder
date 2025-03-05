@@ -86,12 +86,28 @@ export function Hero() {
         setError("An error occurred. Please try again.");
       } finally {
         setLoading(false);
-
-        //setJobDescription("");
-        //setCv("");
-        //setMatchPercentage(0);
       }
     }, 2000);
+  };
+
+  const get_5job_recs = async () => {
+    setLoading(true);
+    try {
+      const response = await fetch("/api/get_5_recs", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          cvSkills: cvSkills,
+        }),
+      });
+
+      const data = await response.json();
+      console.log(data);
+    } catch (error) {
+      setError("An error occurred. Please try again.");
+    }
   };
 
   useEffect(() => {
@@ -105,6 +121,7 @@ export function Hero() {
   useEffect(() => {
     console.log(cvSkills);
     analyzeUserCv();
+    get_5job_recs();
     return () => {
       setMatchPercentage(0);
     };
