@@ -87,11 +87,11 @@ export function Hero() {
 
         const data = await response.json();
         setMatchPercentage(data["matchPercentage"]);
-        setMatchedJobs(data["matchedJobs"]);
-        setUnmatchedJobs(data["unmatchedJobs"]);
+        setMatchedJobs(data["matchedSkills"]);
+        setUnmatchedJobs(data["unmatchedSkills"]);
         console.log(data["matchPercentage"]);
-        console.log(data["matchedJobs"]);
-        console.log(data["unmatchedJobs"]);
+        console.log(data["matchedSkills"]);
+        console.log(data["unmatchedSkills"]);
       } catch (error) {
         setError("An error occurred. Please try again.");
       } finally {
