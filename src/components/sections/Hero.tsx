@@ -123,7 +123,7 @@ export function Hero() {
     }
   };
 
-  const get_recs_resources = async (unmatchedJobs) => {
+  const get_recs_resources = async () => {
     setLoading(true);
     try {
       const response = await fetch("/api/get_recs_resources", {
@@ -145,9 +145,9 @@ export function Hero() {
   };
 
   const handleMatches = async () => {
-    const unmatchedSkills = await getMatch();
+    await getMatch();
 
-    get_recs_resources(unmatchedSkills);
+    get_recs_resources();
   };
 
   useEffect(() => {
