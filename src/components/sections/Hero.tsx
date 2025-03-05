@@ -145,9 +145,11 @@ export function Hero() {
 
   const handleMatches = async () => {
     getMatch();
-    setTimeout(() => {
+    if (unmatchedJobs.length > 0) {
       get_recs_resources();
-    }, 2000);
+    } else {
+      console.log("Error getting resources for missing skills");
+    }
   };
 
   useEffect(() => {
