@@ -121,7 +121,9 @@ export function Hero() {
   useEffect(() => {
     console.log(cvSkills);
     analyzeUserCv();
-    get_5job_recs();
+    setTimeout(() => {
+      get_5job_recs();
+    }, 2000);
     return () => {
       setMatchPercentage(0);
     };
