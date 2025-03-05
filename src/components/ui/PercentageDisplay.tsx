@@ -72,9 +72,7 @@ export function PercentageDisplay({
           />
         </svg>
         <div className="absolute inset-0 flex items-center justify-center">
-          <span className="text-4xl font-semibold">
-            {(Math.round(matchPercentage), 2)}%
-          </span>
+          <span className="text-4xl font-semibold">{matchPercentage}%</span>
         </div>
       </div>
       <div className="text-lg font-medium mt-4">Match Score</div>

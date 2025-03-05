@@ -19,7 +19,9 @@ const fuzzMatchSkills = (jobSkills, cvSkills, threshold = 0.3) => {
   return {
     matchedSkills,
     unmatchedSkills,
-    matchPercentage: (matchedSkills.length / jobSkills.length) * 100,
+    matchPercentage: Math.round(
+      (matchedSkills.length / jobSkills.length) * 100
+    ),
   };
 };
 
