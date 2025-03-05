@@ -15,7 +15,7 @@ export function Hero() {
 
   const analyzeJobDesc = async () => {
     try {
-      const response = await fetch("http://localhost:5000/extract_job_skills", {
+      const response = await fetch("/api/extract_job_skills", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -36,7 +36,7 @@ export function Hero() {
   const analyzeUserCv = async () => {
     setLoading(true);
     try {
-      const response = await fetch("http://localhost:5000/extract_cv_skills", {
+      const response = await fetch("/api/extract_cv_skills", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -58,7 +58,7 @@ export function Hero() {
   const getMatch = async () => {
     console.log("MatchMe clicked");
     try {
-      const response = await fetch("http://localhost:5000/api/get-matches", {
+      const response = await fetch("/api/get-matches", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -176,9 +176,7 @@ export function Hero() {
                     </label>
                     <textarea
                       className="min-h-[120px] min-w-[250px] rounded-lg text-sm border transition-all border-primary ring-2 ring-primary/10 glass-input"
-                      placeholder="
-                        Paste job description here...
-                      "
+                      placeholder="Job Description here..."
                       onChange={(e) =>
                         setJobDescription(e.target.value.toLowerCase().trim())
                       }
@@ -190,9 +188,7 @@ export function Hero() {
                     <label className="text-sm font-medium block">Your CV</label>
                     <textarea
                       className="min-h-[120px] min-w-[250px] rounded-lg text-sm border transition-all border-primary ring-2 ring-primary/10 glass-input"
-                      placeholder="
-                        Paste your CV here...
-                      "
+                      placeholder="CV here..."
                       onChange={(e) =>
                         setCv(e.target.value.toLowerCase().trim())
                       }
