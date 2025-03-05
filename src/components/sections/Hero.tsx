@@ -23,9 +23,7 @@ export function Hero() {
         body: JSON.stringify({ jobDescription }),
       });
       const data = await response.json();
-      const jobSkillsArray = data.skills.map((skill) =>
-        skill.trim().toLowerCase()
-      );
+      const jobSkillsArray = data.map((skill) => skill.trim().toLowerCase());
       setJobDescriptionSkills(jobSkillsArray);
       console.log(data);
     } catch (error) {
@@ -44,9 +42,7 @@ export function Hero() {
         body: JSON.stringify({ cv }),
       });
       const data = await response.json();
-      const cvSkillsArray = data.skills.map((skill) =>
-        skill.trim().toLowerCase()
-      );
+      const cvSkillsArray = data.map((skill) => skill.trim().toLowerCase());
       setCvSkills(cvSkillsArray);
       console.log(data);
     } catch (error) {
