@@ -22,11 +22,37 @@ export function Hero() {
         },
         body: JSON.stringify({ jobDescription }),
       });
+      // Log the entire response
+      console.log("Full response:", response);
+
+      // Check response status
+      console.log("Response status:", response.status);
+
       const data = await response.json();
-      const jobSkillsArray = data.map((skill) => skill.trim().toLowerCase());
+
+      // Log the raw data
+      console.log("Raw data:", data);
+
+      // Log data type
+      console.log("Data type:", typeof data);
+      console.log("Data keys:", Object.keys(data));
+
+      // Additional error checking
+      if (!data || Object.keys(data).length === 0) {
+        console.error("Received empty data");
+        return;
+      }
+
+      const jobSkillsArray = data.jobSkills
+        ? data.jobSkills.map((skill) => skill.trim().toLowerCase())
+        : [];
+
       setJobDescriptionSkills(jobSkillsArray);
-      console.log(data);
+      console.log("Processed job skills:", jobSkillsArray);
     } catch (error) {
+      console.error("Detailed error:", error);
+      // If it's a network error, log the error message
+      console.error("Error message:", error.message);
       setError("An error occurred. Please try again.");
     }
   };
