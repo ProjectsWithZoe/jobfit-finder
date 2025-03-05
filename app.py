@@ -3,9 +3,11 @@ from spacy.matcher import PhraseMatcher
 from flask import Flask, request, jsonify
 from flask_cors import CORS
 from rapidfuzz import fuzz, process
+from fastapi import FastAPI
+from pydantic import BaseModel
 
-app = Flask(__name__)
-CORS(app)
+app = FastAPI()
+
 
 skill_list = [
     # Programming Languages
@@ -387,25 +389,39 @@ patterns = [nlp(skill) for skill in skill_list]
 matcher.add("SKILLS", patterns)
 
 
+# Extract skills function
 def extract_skills(text):
     doc = nlp(text)
     matches = matcher(doc)
     extracted_skills = set([doc[start:end].text for match_id, start, end in matches])
     return list(extracted_skills)
 
-@app.route("/api/extract_job_skills", methods=["POST"])
-def extract_job_skills():
-    data = request.get_json()
-    text = data.get("jobDescription", "")
-    skills = extract_skills(text)
-    return jsonify({"skills": skills})
-@app.route("/api/extract_cv_skills", methods=["POST"])
-def extract_cv_skills():
-    data = request.get_json()
-    text = data.get("cv", "")
-    skills = extract_skills(text)
-    return jsonify({"skills": skills})
+# Pydantic models for request bodies
+class ExtractSkillsRequest(BaseModel):
+    jobDescription: str
 
+class ExtractCvSkillsRequest(BaseModel):
+    cv: str
+
+class GetMatchesRequest(BaseModel):
+    jobDescriptionSkills: list
+    cvSkills: list
+
+# API endpoint to extract job skills
+@app.post("/api/extract_job_skills")
+async def get_job_skills(request: ExtractSkillsRequest):
+    jobDescription = request.jobDescription
+    skills = extract_skills(jobDescription)
+    return {"skills": skills}
+
+# API endpoint to extract CV skills
+@app.post("/api/extract_cv_skills")
+async def get_cv_skills(request: ExtractCvSkillsRequest):
+    cv = request.cv
+    skills = extract_skills(cv)
+    return {"skills": skills}
+
+# Fuzzy matching function for skills
 def fuzzy_match_skills(cv_skills, job_skills, threshold=80):
     matched = []
     unmatched = []
@@ -419,26 +435,25 @@ def fuzzy_match_skills(cv_skills, job_skills, threshold=80):
             unmatched.append(job_skill)
 
     return matched, unmatched
-@app.route("/api/get-matches", methods=["POST"])
-def get_matches():
-    data = request.get_json()
 
-    # Extract arrays from request
-    job_skills = set(data.get("jobDescriptionSkills", []))  # Convert to set for unique values
-    cv_skills = set(data.get("cvSkills", []))  # Convert to set
+# API endpoint to get matches between job skills and CV skills
+@app.post("/api/get-matches")
+async def get_matches(request: GetMatchesRequest):
+    job_skills = set(request.jobDescriptionSkills)  # Convert to set
+    cv_skills = set(request.cvSkills)  # Convert to set
 
     matched, unmatched = fuzzy_match_skills(cv_skills, job_skills, threshold=80)
 
-    # Fix: Only divide by the job description's skill count (not combined count)
+    # Calculate match percentage (based only on job skills)
     match_percentage = (len(matched) / len(job_skills) * 100) if job_skills else 0
 
-    return jsonify({
+    return {
         "matchPercentage": round(match_percentage, 2),
         "matchedSkills": matched,
         "unmatchedSkills": unmatched
-    })
+    }
 
-
-
+# For local development, run the Uvicorn app (for production, handled by Vercel)
 if __name__ == "__main__":
-    app.run(debug=True)
+    import uvicorn
+    uvicorn.run(app, host="0.0.0.0", port=8000)
