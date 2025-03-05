@@ -23,7 +23,7 @@ const fuzzMatchSkills = (jobSkills, cvSkills, threshold = 0.3) => {
   };
 };
 
-module.exports = (req, res) => {
+export default async function handler(req, res) {
   if (req.method === "POST") {
     const { jobDescriptionSkills, cvSkills } = req.body;
     const { matchedSkills, unmatchedSkills, matchPercentage } = fuzzMatchSkills(
@@ -31,5 +31,7 @@ module.exports = (req, res) => {
       cvSkills
     );
     res.status(200).json({ matchedSkills, unmatchedSkills, matchPercentage });
+  } else {
+    res.status(405).json({ error: "Method Not Allowed" });
   }
-};
+}

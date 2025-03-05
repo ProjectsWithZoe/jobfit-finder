@@ -331,15 +331,20 @@ const tokenizer = new natural.WordTokenizer();
 const extractCvSkills = (cv) => {
   const cvTokens = tokenizer.tokenize(cv.toLowerCase());
   const cvSkills = cvTokens.filter((token) => skill_list.includes(token));
-  return cvSkills;
+  return [...new Set(cvSkills)];
 };
 
-module.exports = (req, res) => {
+export default async function handler(req, res) {
   if (req.method === "POST") {
-    const { cv } = req.body;
-    const cvSkills = extractCvSkills(cv);
-    res.status(200).json({ skills });
+    try {
+      const { cv } = req.body;
+      const cvSkills = extractCvSkills(cv);
+      res.status(200).json({ cvSkills });
+    } catch (error) {
+      console.error(error);
+      res.status(500).json({ error: "Something went wrong" });
+    }
   } else {
     res.status(405).json({ error: "Method not allowed" });
   }
-};
+}
