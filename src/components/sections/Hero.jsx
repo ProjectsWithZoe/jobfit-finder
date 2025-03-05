@@ -92,8 +92,11 @@ export function Hero() {
         console.log(data["matchPercentage"]);
         console.log(data["matchedSkills"]);
         console.log(data["unmatchedSkills"]);
+
+        return data["unmatchedSkills"] ?? [];
       } catch (error) {
         setError("An error occurred. Please try again.");
+        return [];
       } finally {
         setLoading(false);
       }
@@ -122,7 +125,7 @@ export function Hero() {
     }
   };
 
-  const get_recs_resources = async () => {
+  const get_recs_resources = async (unmatchedJobs) => {
     setLoading(true);
     try {
       const response = await fetch("/api/get_recs_resources", {
@@ -144,7 +147,13 @@ export function Hero() {
   };
 
   const handleMatches = async () => {
-    await getMatch();
+    const unmatchedSkills = await getMatch();
+
+    if (unmatchedSkills.length > 0) {
+      get_recs_resources(unmatchedSkills);
+    } else {
+      console.log("No unmatched skills");
+    }
   };
 
   useEffect(() => {
