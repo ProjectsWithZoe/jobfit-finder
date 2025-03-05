@@ -145,11 +145,6 @@ export function Hero() {
 
   const handleMatches = async () => {
     await getMatch();
-    if (unmatchedJobs.length > 0) {
-      get_recs_resources();
-    } else {
-      console.log("Error getting resources for missing skills");
-    }
   };
 
   useEffect(() => {
@@ -182,6 +177,10 @@ export function Hero() {
   useEffect(() => {
     console.log("Updated CV Skills:", cvSkills);
   }, [cvSkills]); // Runs whenever cvSkills changes
+
+  useEffect(() => {
+    console.log("Missing CV Skills:", unmatchedJobs);
+  }, [unmatchedJobs]); // Runs whenever cvSkills changes
 
   /*const analyzeGetPercentage = async (jobDescription, cv) => {
     setLoading(true);
