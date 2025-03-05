@@ -141,6 +141,13 @@ export function Hero() {
     }
   };
 
+  const handleMatches = async () => {
+    getMatch();
+    setTimeout(() => {
+      get_recs_resources();
+    }, 2000);
+  };
+
   useEffect(() => {
     console.log(jobDescriptionSkills);
     analyzeJobDesc();
@@ -274,7 +281,7 @@ export function Hero() {
               <Button
                 size="xxl"
                 className="flex-col px-16 mt-4 bg-gradient-to-r to-blue-500 from-purple-700 text-3xl"
-                onClick={getMatch}
+                onClick={handleMatches}
               >
                 MatchMe
               </Button>
