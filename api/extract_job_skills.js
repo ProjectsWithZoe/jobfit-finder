@@ -333,7 +333,7 @@ const extractJobSkills = (jobDescription) => {
   const jobSkills = jobDescriptionTokens.filter((token) =>
     skill_list.includes(token)
   );
-  return set(jobSkills);
+  return [...new Set(jobSkills)];
 };
 
 export default async function handler(req, res) {
