@@ -102,6 +102,8 @@ export function Hero() {
 
   const get_5_recs = async () => {
     setLoading(true);
+
+    if (!cvSkills) return;
     try {
       const response = await fetch("/api/get_5_recs", {
         method: "POST",
@@ -164,6 +166,7 @@ export function Hero() {
     }, 2000);
     return () => {
       setMatchPercentage(0);
+      setCvSkills([]);
     };
   }, [cv]);
 
