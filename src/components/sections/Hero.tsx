@@ -126,6 +126,8 @@ export function Hero() {
   const get_recs_resources = async () => {
     setLoading(true);
     try {
+      console.log("Sending to API - cvSkills:", cvSkills);
+      console.log("Sending to API - unmatchedJobs:", unmatchedJobs);
       const response = await fetch("/api/get_recs_resources", {
         method: "POST",
         headers: {
@@ -146,8 +148,9 @@ export function Hero() {
 
   const handleMatches = async () => {
     await getMatch();
-
-    get_recs_resources();
+    setTimeout(() => {
+      get_recs_resources();
+    }, 3000);
   };
 
   useEffect(() => {
