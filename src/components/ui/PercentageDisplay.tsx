@@ -3,18 +3,26 @@ import { cn } from "@/lib/utils";
 
 interface PercentageDisplayProps {
   initialPercentage?: number;
-  finalPercentage: number;
+  finalPercentage?: number;
   className?: string;
   duration?: number;
+  matchPercentage?: number;
 }
 
 export function PercentageDisplay({
+  matchPercentage,
   initialPercentage = 0,
   finalPercentage,
   className,
   duration = 2000,
 }: PercentageDisplayProps) {
   const [percentage, setPercentage] = useState(initialPercentage);
+
+  const getColor = (percentage: number) => {
+    const red = Math.min(255, (255 * (100 - matchPercentage)) / 100);
+    const green = Math.min(255, (255 * matchPercentage) / 100);
+    return `rgb(${red}, ${green}, 0)`;
+  };
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -29,6 +37,8 @@ export function PercentageDisplay({
 
     return () => clearInterval(interval);
   }, [finalPercentage, initialPercentage, duration]);
+
+  const circleColor = getColor(percentage);
 
   return (
     <div className={cn("flex flex-col items-center", className)}>
@@ -50,10 +60,10 @@ export function PercentageDisplay({
             cy="50"
             r="45"
             fill="none"
-            stroke="currentColor"
+            stroke={circleColor}
             strokeWidth="10"
-            strokeDasharray={`${(2 * Math.PI * 45 * percentage) / 100} ${
-              (2 * Math.PI * 45 * (100 - percentage)) / 100
+            strokeDasharray={`${(2 * Math.PI * 45 * matchPercentage) / 100} ${
+              (2 * Math.PI * 45 * (100 - matchPercentage)) / 100
             }`}
             strokeDashoffset={(2 * Math.PI * 45 * 25) / 100}
             strokeLinecap="round"
@@ -62,7 +72,7 @@ export function PercentageDisplay({
           />
         </svg>
         <div className="absolute inset-0 flex items-center justify-center">
-          <span className="text-4xl font-semibold">{percentage}%</span>
+          <span className="text-4xl font-semibold">{matchPercentage}%</span>
         </div>
       </div>
       <div className="text-lg font-medium mt-4">Match Score</div>

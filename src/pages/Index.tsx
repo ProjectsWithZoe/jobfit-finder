@@ -1,4 +1,4 @@
-import React from "react";
+import { useEffect } from "react";
 import { Navbar } from "@/components/layout/Navbar";
 import { Hero } from "@/components/sections/Hero";
 import { Features } from "@/components/sections/Features";
@@ -10,7 +10,7 @@ import { RewardTracker } from "@/components/ui/RewardTracker";
 import { toast } from "sonner";
 
 const Index = () => {
-  React.useEffect(() => {
+  useEffect(() => {
     // Welcome toast for new visitors
     const hasVisited = localStorage.getItem("hasVisited");
     if (!hasVisited) {

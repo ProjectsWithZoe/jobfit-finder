@@ -10,50 +10,95 @@ export function Hero() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
   const [matchPercentage, setMatchPercentage] = useState(0);
+  const [jobDescriptionSkills, setJobDescriptionSkills] = useState([]);
+  const [cvSkills, setCvSkills] = useState([]);
 
-  const analyzeJobDesc = async (jobDescription) => {
+  const analyzeJobDesc = async () => {
+    try {
+      const response = await fetch("http://localhost:5000/extract_job_skills", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ jobDescription }),
+      });
+      const data = await response.json();
+      const jobSkillsArray = data.skills.map((skill) =>
+        skill.trim().toLowerCase()
+      );
+      setJobDescriptionSkills(jobSkillsArray);
+      console.log(jobSkillsArray);
+    } catch (error) {
+      setError("An error occurred. Please try again.");
+    }
+  };
+
+  const analyzeUserCv = async () => {
     setLoading(true);
     try {
-      const response = await fetch(
-        "http://localhost:5000/api/analyze-job-description",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({ jobDescription }),
-        }
-      );
+      const response = await fetch("http://localhost:5000/extract_cv_skills", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ cv }),
+      });
       const data = await response.json();
-      console.log(data);
+      const cvSkillsArray = data.skills.map((skill) =>
+        skill.trim().toLowerCase()
+      );
+      setCvSkills(cvSkillsArray);
+      console.log(cvSkillsArray);
     } catch (error) {
       setError("An error occurred. Please try again.");
     }
     setLoading(false);
   };
 
-  const analyzeUserCv = async (cv) => {
-    setLoading(true);
+  const getMatch = async () => {
+    console.log("MatchMe clicked");
     try {
-      const response = await fetch(
-        "http://localhost:5000/api/analyze-user-cv",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({ cv }),
-        }
-      );
+      const response = await fetch("http://localhost:5000/api/get-matches", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          jobDescriptionSkills: jobDescriptionSkills,
+          cvSkills: cvSkills,
+        }),
+      });
+
       const data = await response.json();
-      console.log(data);
+      setMatchPercentage(data["matchPercentage"]);
+      console.log(data["matchPercentage"]);
     } catch (error) {
       setError("An error occurred. Please try again.");
+    } finally {
+      setLoading(false);
+      //setJobDescription("");
+      //setCv("");
+      //setMatchPercentage(0);
     }
-    setLoading(false);
   };
 
-  const analyzeGetPercentage = async (jobDescription, cv) => {
+  useEffect(() => {
+    console.log(jobDescriptionSkills);
+    analyzeJobDesc();
+    return () => {
+      setMatchPercentage(0);
+    };
+  }, [jobDescription]);
+
+  useEffect(() => {
+    console.log(cvSkills);
+    analyzeUserCv();
+    return () => {
+      setMatchPercentage(0);
+    };
+  }, [cv]);
+
+  /*const analyzeGetPercentage = async (jobDescription, cv) => {
     setLoading(true);
     try {
       const response = await fetch("http://localhost:5000/api/get-percentage", {
@@ -76,7 +121,7 @@ export function Hero() {
     if (jobDescription && cv) {
       analyzeGetPercentage(jobDescription, cv);
     }
-  }, [jobDescription, cv]);
+  }, [jobDescription, cv]);*/
 
   return (
     <section className="pt-32 pb-24 px-6 relative overflow-hidden">
@@ -122,15 +167,15 @@ export function Hero() {
           </div>
 
           <div className="flex-1 w-full max-w-lg animate-fade-in">
-            <div className="glass-card p-8 rounded-2xl relative">
+            <div className="flex flex-col glass-card p-8 rounded-2xl relative">
               <div className="flex flex-col md:flex-row gap-6">
                 <div className="flex-1 space-y-4">
                   <div className="space-y-2">
                     <label id="jobDesc" className=" text-sm font-medium block">
                       Job Description
                     </label>
-                    <input
-                      className="min-h-[120px] p-10 rounded-lg text-sm border transition-all border-primary ring-2 ring-primary/10 glass-input"
+                    <textarea
+                      className="min-h-[120px] min-w-[250px] rounded-lg text-sm border transition-all border-primary ring-2 ring-primary/10 glass-input"
                       placeholder="
                         Paste job description here...
                       "
@@ -143,8 +188,8 @@ export function Hero() {
 
                   <div className="space-y-2">
                     <label className="text-sm font-medium block">Your CV</label>
-                    <input
-                      className="min-h-[120px] p-10 rounded-lg text-sm border transition-all border-primary ring-2 ring-primary/10 glass-input"
+                    <textarea
+                      className="min-h-[120px] min-w-[250px] rounded-lg text-sm border transition-all border-primary ring-2 ring-primary/10 glass-input"
                       placeholder="
                         Paste your CV here...
                       "
@@ -157,9 +202,16 @@ export function Hero() {
                 </div>
 
                 <div className="flex-shrink-0 flex items-center justify-center">
-                  <PercentageDisplay finalPercentage={matchPercentage} />
+                  <PercentageDisplay matchPercentage={matchPercentage} />
                 </div>
               </div>
+              <Button
+                size="xxl"
+                className="flex-col px-16 mt-4 bg-gradient-to-r to-blue-500 from-purple-700 text-3xl"
+                onClick={getMatch}
+              >
+                MatchMe
+              </Button>
             </div>
           </div>
         </div>
