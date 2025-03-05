@@ -149,11 +149,7 @@ export function Hero() {
   const handleMatches = async () => {
     const unmatchedSkills = await getMatch();
 
-    if (unmatchedSkills.length > 0) {
-      get_recs_resources(unmatchedSkills);
-    } else {
-      console.log("No unmatched skills");
-    }
+    get_recs_resources(unmatchedSkills);
   };
 
   useEffect(() => {
