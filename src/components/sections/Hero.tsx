@@ -69,36 +69,40 @@ export function Hero() {
     setLoading(false);
   };
 
-  const getMatch = async () => {
+  const getMatch = (): Promise<void> => {
     setLoading(true);
-    setTimeout(async () => {
-      console.log("MatchMe clicked");
-      try {
-        const response = await fetch("/api/get_matches", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            jobDescriptionSkills: jobDescriptionSkills,
-            cvSkills: cvSkills,
-          }),
-        });
+    return new Promise<void>((resolve) => {
+      setTimeout(async () => {
+        console.log("MatchMe clicked");
+        try {
+          const response = await fetch("/api/get_matches", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+              jobDescriptionSkills: jobDescriptionSkills,
+              cvSkills: cvSkills,
+            }),
+          });
 
-        const data = await response.json();
-        const matchedSkills = data["matchedSkills"];
-        const unmatchedSkills = data["unmatchedSkills"];
-        const matchPercentage = data["matchPercentage"];
-        setMatchPercentage(matchPercentage);
-        setMatchedJobs(matchedSkills);
-        setUnmatchedJobs(unmatchedSkills);
-        console.log(matchedSkills, matchPercentage, unmatchedSkills);
-      } catch (error) {
-        setError("An error occurred. Please try again.");
-      } finally {
-        setLoading(false);
-      }
-    }, 2000);
+          const data = await response.json();
+          const matchedSkills = data["matchedSkills"];
+          const unmatchedSkills = data["unmatchedSkills"];
+          const matchPercentage = data["matchPercentage"];
+          setMatchPercentage(matchPercentage);
+          setMatchedJobs(matchedSkills);
+          setUnmatchedJobs(unmatchedSkills);
+          console.log(matchedSkills, matchPercentage, unmatchedSkills);
+          resolve();
+        } catch (error) {
+          setError("An error occurred. Please try again.");
+          resolve();
+        } finally {
+          setLoading(false);
+        }
+      }, 2000);
+    });
   };
 
   const get_5_recs = async () => {
