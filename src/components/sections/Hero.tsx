@@ -161,14 +161,17 @@ export function Hero() {
   useEffect(() => {
     console.log(cvSkills);
     analyzeUserCv();
+
+    return () => {
+      setMatchPercentage(0);
+    };
+  }, [cv]);
+
+  useEffect(() => {
     setTimeout(() => {
       get_5_recs();
     }, 2000);
-    return () => {
-      setMatchPercentage(0);
-      setCvSkills([]);
-    };
-  }, [cv]);
+  }, [cvSkills]);
 
   useEffect(() => {
     console.log("Updated Job Skills:", jobDescriptionSkills);
