@@ -1,4 +1,4 @@
-const Fuse = require("fuse.js");
+import Fuse from "fuse.js";
 
 const fuzzMatchSkills = (jobSkills, cvSkills, threshold = 0.3) => {
   const fuse = new Fuse(jobSkills, {

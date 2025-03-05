@@ -1,4 +1,4 @@
-const natural = require("natural");
+import natural from "natural";
 
 skill_list = [
   // Programming Languages
