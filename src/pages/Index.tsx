@@ -8,6 +8,7 @@ import { CallToAction } from "@/components/sections/CallToAction";
 import { Footer } from "@/components/sections/Footer";
 import { RewardTracker } from "@/components/ui/RewardTracker";
 import { toast } from "sonner";
+import { Pricing } from "@/components/sections/Pricing";
 
 const Index = () => {
   useEffect(() => {
@@ -30,6 +31,7 @@ const Index = () => {
       <main>
         <Hero />
         <Features />
+        <Pricing />
         <HowItWorks />
 
         {/* Rewards section */}
