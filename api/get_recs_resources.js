@@ -8,11 +8,15 @@ const openai = new OpenAI(process.env.OPENAI_API_KEY);
 export default async function handler(req, res) {
   if (req.method === "POST") {
     const { cvSkills, unmatchedJobs } = req.body;
+    const skillsToLearn =
+      Array.isArray(unmatchedJobs) && unmatchedJobs.length > 0
+        ? unmatchedJobs
+        : ["No specific skills needed"];
     const prompt = `Analyze the given CV skills and identify 10 job roles that closely align with the candidate's skill set. Ensure the job recommendations are relevant to the industry and expertise level.  
 cvSkills: ${cvSkills}  
 
 Provide 5 high-quality websites or resources where the candidate can learn these unmatched skills.  
-unmatchedSkills: ${unmatchedJobs}  
+unmatchedSkills: ${skillsToLearn}
 
 Format the response strictly as JSON:  
 {

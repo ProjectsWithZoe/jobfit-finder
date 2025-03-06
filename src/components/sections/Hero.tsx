@@ -61,6 +61,10 @@ export function Hero() {
         : [];
       setCvSkills(cvSkillsArray);
       console.log("Processed cv skills:", cvSkillsArray);
+
+      if (cvSkillsArray.length > 0) {
+        get_5_recs(cvSkillsArray);
+      }
     } catch (error) {
       console.error("Detailed error:", error);
       console.error("Error message:", error.message);
@@ -69,43 +73,50 @@ export function Hero() {
     setLoading(false);
   };
 
-  const getMatch = (): Promise<void> => {
-    setLoading(true);
-    return new Promise<void>((resolve) => {
-      setTimeout(async () => {
-        console.log("MatchMe clicked");
-        try {
-          const response = await fetch("/api/get_matches", {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify({
-              jobDescriptionSkills: jobDescriptionSkills,
-              cvSkills: cvSkills,
-            }),
-          });
+  const getMatch = async () => {
+    if (!jobDescriptionSkills.length || !cvSkills.length) {
+      setError("Please ensure both job description and CV have been analyzed.");
+      return;
+    }
 
-          const data = await response.json();
-          const matchedSkills = data["matchedSkills"];
-          const unmatchedSkills = data["unmatchedSkills"];
-          const matchPercentage = data["matchPercentage"];
-          setMatchPercentage(matchPercentage);
-          setMatchedJobs(matchedSkills);
-          setUnmatchedJobs(unmatchedSkills);
-          console.log(matchedSkills, matchPercentage, unmatchedSkills);
-          resolve();
-        } catch (error) {
-          setError("An error occurred. Please try again.");
-          resolve();
-        } finally {
-          setLoading(false);
-        }
-      }, 2000);
-    });
+    setLoading(true);
+    try {
+      const response = await fetch("/api/get_matches", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          jobDescriptionSkills,
+          cvSkills,
+        }),
+      });
+
+      const data = await response.json();
+      const matchedSkills = data.matchedSkills || [];
+      const unmatchedSkills = data.unmatchedSkills || [];
+      const matchPercentage = data.matchPercentage || 0;
+
+      setMatchPercentage(matchPercentage);
+      setMatchedJobs(matchedSkills);
+      setUnmatchedJobs(unmatchedSkills);
+
+      // Now that we have match data, get resources immediately
+      if (cvSkills.length > 0) {
+        // Pass the unmatched skills we just received
+        get_recs_resources(cvSkills, unmatchedSkills);
+      }
+    } catch (error) {
+      console.error("Error getting matches:", error);
+      setError(
+        "An error occurred while calculating the match. Please try again."
+      );
+    } finally {
+      setLoading(false);
+    }
   };
 
-  const get_5_recs = async () => {
+  const get_5_recs = async (cvSkills) => {
     setLoading(true);
 
     if (!cvSkills) return;
@@ -127,7 +138,8 @@ export function Hero() {
     }
   };
 
-  const get_recs_resources = async () => {
+  const get_recs_resources = async (cvSkills, unmatchedSkills) => {
+    if (!cvSkills || !unmatchedSkills) return;
     setLoading(true);
     try {
       console.log("Sending to API - cvSkills:", cvSkills);
@@ -139,7 +151,7 @@ export function Hero() {
         },
         body: JSON.stringify({
           cvSkills: cvSkills,
-          unmatchedJobs: unmatchedJobs,
+          unmatchedJobs: unmatchedSkills,
         }),
       });
 
@@ -148,13 +160,6 @@ export function Hero() {
     } catch (error) {
       setError("An error occurred. Please try again.");
     }
-  };
-
-  const handleMatches = async () => {
-    await getMatch();
-    setTimeout(() => {
-      get_recs_resources();
-    }, 3000);
   };
 
   useEffect(() => {
@@ -173,12 +178,6 @@ export function Hero() {
       setMatchPercentage(0);
     };
   }, [cv]);
-
-  useEffect(() => {
-    setTimeout(() => {
-      get_5_recs();
-    }, 2000);
-  }, [cvSkills]);
 
   useEffect(() => {
     console.log("Updated Job Skills:", jobDescriptionSkills);
@@ -298,7 +297,7 @@ export function Hero() {
               <Button
                 size="xxl"
                 className="flex-col px-16 mt-4 bg-gradient-to-r to-blue-500 from-purple-700 text-3xl"
-                onClick={handleMatches}
+                onClick={getMatch}
               >
                 MatchMe
               </Button>
