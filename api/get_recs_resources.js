@@ -21,7 +21,7 @@ unmatchedSkills: ${skillsToLearn}
 Format the response strictly as JSON:  
 {
   "jobRecommendations": ["Job Title 1", "Job Title 2", ..., "Job Title 10"],
-  "learningResources": ["Resource URL 1", "Resource URL 2", ..., "Resource URL 5"]
+  "learningResources": [{"Skill 1: Resource URL 1"}, {"Skill 2 : Resource URL 2"}, ..., {"Skill 5: Resource URL 5"}]
 }`;
 
     const response = await openai.chat.completions.create({
