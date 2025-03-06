@@ -46,11 +46,18 @@ export function Navbar() {
             How it Works
           </a>
           <a
+            href="#pricing"
+            className="text-sm font-medium hover:text-primary transition-colors"
+          >
+            Pricing
+          </a>
+          <a
             href="#testimonials"
             className="text-sm font-medium hover:text-primary transition-colors"
           >
             Testimonials
           </a>
+
           <Button size="sm">Try Now</Button>
         </div>
 

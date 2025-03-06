@@ -1,5 +1,5 @@
-
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:ital@0;1&display=swap");
 
 @tailwind base;
 @tailwind components;
@@ -84,11 +84,11 @@
   .glass-card {
     @apply bg-white/80 backdrop-blur-md border border-white/20 shadow-lg;
   }
-  
+
   .glass-input {
     @apply bg-white/50 backdrop-blur-sm border border-white/20 shadow-sm;
   }
-  
+
   .text-balance {
     text-wrap: balance;
   }

@@ -10,6 +10,7 @@ interface FeatureCardProps {
   className?: string;
   buttonText?: string;
   onButtonClick?: () => void;
+  buttonClassName?: string;
 }
 
 export function FeatureCard({
@@ -18,6 +19,7 @@ export function FeatureCard({
   description = [], // Default to an empty array if no description is provided
   className,
   buttonText,
+  buttonClassName,
   onButtonClick,
 }: FeatureCardProps) {
   // Validate that description is an array before calling map
@@ -26,7 +28,7 @@ export function FeatureCard({
   return (
     <div
       className={cn(
-        "p-6 rounded-2xl glass-card flex flex-col hover-scale group cursor-default",
+        "p-6 rounded-2xl glass-card h-full hover-scale group cursor-default",
         className
       )}
     >
@@ -52,7 +54,7 @@ export function FeatureCard({
       {buttonText && onButtonClick && (
         <Button
           onClick={onButtonClick}
-          className="mt-8 py-6 px-16 text-xl w-full flex flex-col"
+          className={cn("mt-8 py-6 px-16 text-xl ", buttonClassName)} // Use cn to merge default and custom styles
         >
           {buttonText}
         </Button>
