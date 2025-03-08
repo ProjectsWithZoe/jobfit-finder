@@ -134,9 +134,9 @@ export function Hero() {
       });
 
       const data = await response.json();
-      const results = data.jobRecs;
-      console.log(data.jobRecs);
-      setFiveJobRecommendations(results);
+
+      console.log("Data", data);
+      setFiveJobRecommendations(data);
     } catch (error) {
       setError("An error occurred. Please try again.");
     }
@@ -317,13 +317,13 @@ export function Hero() {
         </div>
       </section>
       {/* Add the Results component with data */}
-      {/*{(matchedJobs.length > 0 || unmatchedJobs.length > 0) && (
+      {(matchedJobs.length > 0 || unmatchedJobs.length > 0) && (
         <Results
           matchedJobs={matchedJobs}
           unmatchedJobs={unmatchedJobs}
           jobRecommendations={fiveJobRecommendations}
         />
-      )}*/}
+      )}
     </>
   );
 }
