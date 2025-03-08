@@ -37,7 +37,7 @@ export function Results({
       icon: BookOpen,
       title: "Job Recommendations",
       description: "Suggested job roles based on your current skill set.",
-      data: jobRecommendations.jobRecs,
+      data: jobRecommendations,
       color: "text-blue-500",
       textColor: "blue",
     },
