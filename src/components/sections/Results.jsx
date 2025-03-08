@@ -97,12 +97,15 @@ export function Results({
                 {feature.data.length > 0 ? (
                   <ul className="space-y-2">
                     {feature.data.slice(0, 8).map((item, idx) => (
-                      <li key={idx} className="flex items-center gap-2">
+                      <li
+                        key={idx}
+                        className="flex flex-row items-center gap-2"
+                      >
                         <div
                           className={`w-2 h-2 rounded-full
                           )}`}
                         ></div>
-                        <span className="text-sm bg-gray-100 p-2 rounded">
+                        <span className="text-sm bg-purple-200 p-2 rounded">
                           {renderItem(item)}
                         </span>
                       </li>
