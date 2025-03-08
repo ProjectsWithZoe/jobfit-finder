@@ -11,13 +11,13 @@ import {
 
 // Firebase configuration - replace with your own config
 const firebaseConfig = {
-  apiKey: process.env.FIREBASE_apiKey,
-  authDomain: process.env.FIREBASE_authDomain,
-  projectId: process.env.FIREBASE_projectId,
-  storageBucket: process.env.FIREBASE_storageBucket,
-  messagingSenderId: process.env.FIREBASE_messagingSenderId,
-  appId: process.env.FIREBASE_appId,
-  measurementId: process.env.FIREBASE_measurementId,
+  apiKey: process.env.VITE_FIREBASE_apiKey,
+  authDomain: process.env.VITE_FIREBASE_authDomain,
+  projectId: process.env.VITE_FIREBASE_projectId,
+  storageBucket: process.env.VITE_FIREBASE_storageBucket,
+  messagingSenderId: process.env.VITE_FIREBASE_messagingSenderId,
+  appId: process.env.VITE_FIREBASE_appId,
+  measurementId: process.env.VITE_FIREBASE_measurementId,
 };
 
 // Initialize Firebase
