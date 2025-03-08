@@ -41,7 +41,7 @@ export default async function handler(req, res) {
     });
     const airesponse = response.choices[0].message.content;
     console.log(airesponse);
-    const jobRecs = parsedResponse["jobRecommendations"];
+    const jobRecs = airesponse["jobRecommendations"];
     console.log(jobRecs);
     res.status(200).json({ jobRecs });
   } else {
