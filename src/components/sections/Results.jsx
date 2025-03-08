@@ -141,6 +141,7 @@ export function ResultsPro({
   matchedJobs = [],
   unmatchedJobs = [],
   jobRecommendations = [],
+  learningResources = [],
 }) {
   const features = [
     {

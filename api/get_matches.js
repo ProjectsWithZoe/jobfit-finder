@@ -1,14 +1,14 @@
 import Fuse from "fuse.js";
 
 const fuzzMatchSkills = (jobSkills, cvSkills, threshold = 0.3) => {
-  const fuse = new Fuse(jobSkills, {
+  const fuse = new Fuse(cvSkills, {
     threshold: threshold,
     includeScore: true,
   });
   const matchedSkills = [];
   const unmatchedSkills = [];
 
-  cvSkills.forEach((skill) => {
+  jobSkills.forEach((skill) => {
     const result = fuse.search(skill);
     if (result.length > 0 && result[0].score <= threshold) {
       matchedSkills.push({ skill, matchedSkill: result[0].item });

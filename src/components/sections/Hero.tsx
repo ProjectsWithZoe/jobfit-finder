@@ -5,6 +5,7 @@ import { PercentageDisplay } from "@/components/ui/PercentageDisplay";
 import { useNavigate } from "react-router-dom";
 import { set } from "react-hook-form";
 import { ResultsPremium } from "@/components/sections/Results";
+import { ResultsPro } from "@/components/sections/Results";
 
 export function Hero() {
   const [isTextareaActive, setIsTextareaActive] = useState(false);
@@ -160,6 +161,10 @@ export function Hero() {
       });
 
       const data = await response.json();
+      const results = data.jobRecs;
+      const learningResources = data.learningResources;
+      setTenJobRecommendations(results);
+      setLearningResources(learningResources);
       console.log(data);
     } catch (error) {
       setError("An error occurred. Please try again.");
@@ -322,6 +327,15 @@ export function Hero() {
           matchedJobs={matchedJobs}
           unmatchedJobs={unmatchedJobs}
           jobRecommendations={fiveJobRecommendations}
+        />
+      )}
+
+      {(matchedJobs.length > 0 || unmatchedJobs.length > 0) && (
+        <ResultsPro
+          matchedJobs={matchedJobs}
+          unmatchedJobs={unmatchedJobs}
+          jobRecommendations={tenJobRecommendations}
+          learningResources={learningResources}
         />
       )}
     </>
