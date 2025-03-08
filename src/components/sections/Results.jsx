@@ -8,6 +8,7 @@ import {
   CheckCircle,
   XCircle,
   BookOpen,
+  Lightbulb,
 } from "lucide-react";
 
 export function ResultsPremium({
@@ -164,12 +165,21 @@ export function ResultsPro({
       textColor: "red",
     },
     {
-      icon: BookOpen,
+      icon: Lightbulb,
       title: "Job Recommendations",
       skills: false,
       description: "Suggested job roles based on your current skill set.",
       data: jobRecommendations,
       color: "text-blue-500",
+      textColor: "blue",
+    },
+    {
+      icon: BookOpen,
+      title: "Job Recommendations",
+      skills: false,
+      description: "Suggested learning resources based on missing skills.",
+      data: learningResources,
+      color: "text-yellow-500",
       textColor: "blue",
     },
   ];
@@ -203,7 +213,7 @@ export function ResultsPro({
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
           {features.map((feature, index) => (
             <div
               key={index}
