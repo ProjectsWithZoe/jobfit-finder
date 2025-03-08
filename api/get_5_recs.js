@@ -39,7 +39,7 @@ export default async function handler(req, res) {
       ],
       temperature: 0,
     });
-    const airesponse = response.choices[0].message.content;
+    const airesponse = JSON.parse(response.choices[0].message.content);
     console.log(airesponse);
     const jobRecs = airesponse["jobRecommendations"];
     console.log(jobRecs);
