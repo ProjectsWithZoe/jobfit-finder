@@ -4,7 +4,7 @@ import { AnimatedText } from "@/components/ui/AnimatedText";
 import { PercentageDisplay } from "@/components/ui/PercentageDisplay";
 import { useNavigate } from "react-router-dom";
 import { set } from "react-hook-form";
-import { Results } from "@/components/sections/Results";
+import { ResultsPremium } from "@/components/sections/Results";
 
 export function Hero() {
   const [isTextareaActive, setIsTextareaActive] = useState(false);
@@ -318,11 +318,10 @@ export function Hero() {
       </section>
       {/* Add the Results component with data */}
       {(matchedJobs.length > 0 || unmatchedJobs.length > 0) && (
-        <Results
+        <ResultsPremium
           matchedJobs={matchedJobs}
           unmatchedJobs={unmatchedJobs}
           jobRecommendations={fiveJobRecommendations}
-          feature
         />
       )}
     </>
