@@ -119,27 +119,28 @@ export function Hero() {
   };
 
   const get_5_recs = async (cvSkills) => {
-    setLoading(true);
-
     if (!cvSkills) return;
+    setLoading(true);
     try {
       const response = await fetch("/api/get_5_recs", {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          cvSkills: cvSkills,
-        }),
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ cvSkills }),
       });
 
       const data = await response.json();
+      console.log("Job recommendations:", data);
 
-      console.log("Data", data);
-      //setFiveJobRecommendations(data);
+      if (Array.isArray(data.jobRecs)) {
+        setFiveJobRecommendations(data.jobRecs);
+      } else {
+        setFiveJobRecommendations([]);
+      }
     } catch (error) {
-      setError("An error occurred. Please try again.");
+      console.error("Error fetching job recommendations:", error);
+      setError("An error occurred while fetching recommendations.");
     }
+    setLoading(false);
   };
 
   const get_recs_resources = async (cvSkills, unmatchedSkills) => {
