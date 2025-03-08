@@ -23,6 +23,7 @@ export function Results({
         "Skills from your CV that match the job description requirements.",
       data: matchedJobs,
       color: "text-green-500",
+      textColor: "green",
     },
     {
       icon: XCircle,
@@ -30,13 +31,15 @@ export function Results({
       description: "Skills required by the job that weren't found in your CV.",
       data: unmatchedJobs,
       color: "text-red-500",
+      textColor: "red",
     },
     {
       icon: BookOpen,
       title: "Job Recommendations",
       description: "Suggested job roles based on your current skill set.",
-      data: jobRecommendations,
+      data: jobRecommendations.jobRecs,
       color: "text-blue-500",
+      textColor: "blue",
     },
   ];
 
@@ -73,7 +76,7 @@ export function Results({
           {features.map((feature, index) => (
             <div
               key={index}
-              className="animate-slide-up border-t-4"
+              className="animate-slide-up"
               style={{
                 animationDelay: `${index * 0.1}s`,
                 borderTopColor: feature.color.replace("text-", ""),
@@ -82,7 +85,9 @@ export function Results({
               <div className="pb-2">
                 <div className="flex items-center gap-2">
                   <feature.icon className={`h-6 w-6 ${feature.color}`} />
-                  <div className="text-xl">{feature.title}</div>
+                  <div className={`text-xl text-${feature.textColor}-500`}>
+                    {feature.title}
+                  </div>
                 </div>
                 <p className="text-sm text-muted-foreground mt-2">
                   {feature.description}
