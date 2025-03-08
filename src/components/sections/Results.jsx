@@ -40,6 +40,24 @@ export function Results({
     },
   ];
 
+  // Helper function to render the item based on its type
+  const renderItem = (item) => {
+    if (typeof item === "string") {
+      return item;
+    } else if (typeof item === "object") {
+      // Handling objects with skill and matchedSkill keys
+      if (item.skill) {
+        return item.skill;
+      } else if (item.matchedSkill) {
+        return item.matchedSkill;
+      } else {
+        // Fallback for other object structures
+        return JSON.stringify(item);
+      }
+    }
+    return String(item);
+  };
+
   return (
     <section id="results" className="py-24 px-6 bg-accent/50">
       <div className="max-w-7xl mx-auto">
@@ -63,7 +81,7 @@ export function Results({
             >
               <div className="pb-2">
                 <div className="flex items-center gap-2">
-                  <div className={`h-6 w-6 ${feature.color}`} />
+                  <feature.icon className={`h-6 w-6 ${feature.color}`} />
                   <div className="text-xl">{feature.title}</div>
                 </div>
                 <p className="text-sm text-muted-foreground mt-2">
@@ -81,7 +99,7 @@ export function Results({
                             "bg-"
                           )}`}
                         ></div>
-                        <span className="text-sm">{item}</span>
+                        <span className="text-sm">{renderItem(item)}</span>
                       </li>
                     ))}
                     {feature.data.length > 8 && (
