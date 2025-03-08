@@ -14,7 +14,10 @@ export function Results({
   matchedJobs = [],
   unmatchedJobs = [],
   jobRecommendations = [],
+  feature,
 }) {
+  const [showAll, setShowAll] = useState(false);
+  const visibleItems = showAll ? feature.data : feature.data.slice(0, 8);
   const features = [
     {
       icon: CheckCircle,
@@ -96,18 +99,29 @@ export function Results({
               <div>
                 {feature.data.length > 0 ? (
                   <ul className="space-y-2">
-                    {feature.data.slice(0, 8).map((item, idx) => (
+                    {visibleItems.map((item, idx) => (
                       <li key={idx} className="flex items-center gap-2">
                         <div
-                          className={`w-2 h-2 rounded-full bg-gray-500
+                          className={`w-2 h-2 rounded-full
                           )}`}
                         ></div>
-                        <span className="text-sm">{renderItem(item)}</span>
+                        <span className="text-sm bg-gray-500 rounded">
+                          {renderItem(item)}
+                        </span>
                       </li>
                     ))}
                     {feature.data.length > 8 && (
-                      <li className="text-xs text-muted-foreground text-center pt-2">
-                        + {feature.data.length - 8} more items
+                      <li className="text-xs text-muted-foreground text-center pt-2 ">
+                        <button
+                          onClick={() => {
+                            setShowAll(!showAll);
+                          }}
+                          className="text-blue-500 hover:underline"
+                        >
+                          {showAll
+                            ? "Show Less"
+                            : `+ ${feature.data.length - 8} more items`}
+                        </button>
                       </li>
                     )}
                   </ul>
