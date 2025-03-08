@@ -136,7 +136,7 @@ export function Hero() {
       const data = await response.json();
 
       console.log("Data", data);
-      setFiveJobRecommendations(data);
+      //setFiveJobRecommendations(data);
     } catch (error) {
       setError("An error occurred. Please try again.");
     }
