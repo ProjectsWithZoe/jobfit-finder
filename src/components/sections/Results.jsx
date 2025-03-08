@@ -103,7 +103,7 @@ export function Results({
                       {feature.data.map((item, idx) => (
                         <div
                           key={idx}
-                          className="flex flex-row items-center gap-2 bg-purple-100 p-2 rounded"
+                          className="flex flex-row items-center gap-2 bg-purple-100 p-2"
                         >
                           <span className="text-sm">{renderItem(item)}</span>
                         </div>
