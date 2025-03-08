@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { FeatureCard } from "@/components/ui/FeatureCard";
 import {
   BarChart,
@@ -14,10 +14,7 @@ export function Results({
   matchedJobs = [],
   unmatchedJobs = [],
   jobRecommendations = [],
-  feature,
 }) {
-  const [showAll, setShowAll] = useState(false);
-  const visibleItems = showAll ? feature.data : feature.data.slice(0, 8);
   const features = [
     {
       icon: CheckCircle,
@@ -99,7 +96,7 @@ export function Results({
               <div>
                 {feature.data.length > 0 ? (
                   <ul className="space-y-2">
-                    {visibleItems.map((item, idx) => (
+                    {feature.data.slice(0, 8).map((item, idx) => (
                       <li key={idx} className="flex items-center gap-2">
                         <div
                           className={`w-2 h-2 rounded-full
@@ -112,16 +109,7 @@ export function Results({
                     ))}
                     {feature.data.length > 8 && (
                       <li className="text-xs text-muted-foreground text-center pt-2 ">
-                        <button
-                          onClick={() => {
-                            setShowAll(!showAll);
-                          }}
-                          className="text-blue-500 hover:underline"
-                        >
-                          {showAll
-                            ? "Show Less"
-                            : `+ ${feature.data.length - 8} more items`}
-                        </button>
+                        + {feature.data.length - 8} more items
                       </li>
                     )}
                   </ul>
