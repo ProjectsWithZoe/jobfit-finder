@@ -76,7 +76,7 @@ export function Results({
           {features.map((feature, index) => (
             <div
               key={index}
-              className="animate-slide-up"
+              className="animate-slide-up border border-black-50 shadow-lg rounded-lg bg-gray-50 p-4"
               style={{
                 animationDelay: `${index * 0.1}s`,
                 borderTopColor: feature.color.replace("text-", ""),
@@ -99,9 +99,7 @@ export function Results({
                     {feature.data.slice(0, 8).map((item, idx) => (
                       <li key={idx} className="flex items-center gap-2">
                         <div
-                          className={`w-2 h-2 rounded-full ${feature.color.replace(
-                            "text-",
-                            "bg-"
+                          className={`w-2 h-2 rounded-full bg-gray-500
                           )}`}
                         ></div>
                         <span className="text-sm">{renderItem(item)}</span>
