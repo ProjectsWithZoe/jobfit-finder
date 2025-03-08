@@ -39,8 +39,10 @@ export default async function handler(req, res) {
       ],
       temperature: 0,
     });
-    const parsedResponse = response.choices[0].message.content;
+    const airesponse = response.choices[0].message.content;
+    console.log(airesponse);
     const jobRecs = parsedResponse["jobRecommendations"];
+    console.log(jobRecs);
     res.status(200).json({ jobRecs });
   } else {
     res.status(405).json({ error: "Method Not Allowed" });
