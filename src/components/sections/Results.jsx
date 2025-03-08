@@ -100,20 +100,15 @@ export function Results({
                 {feature.data.length > 0 ? (
                   feature.skills ? (
                     <div className="flex flex-wrap gap-2">
-                      {feature.data.slice(0, 8).map((item, idx) => (
+                      {feature.data.map((item, idx) => (
                         <div
                           key={idx}
                           className="flex flex-row items-center gap-2 bg-purple-100 p-2 rounded"
                         >
-                          <div className="w-2 h-2 rounded-full bg-gray-500"></div>
+                          <div className="w-2 h-2 rounded-full"></div>
                           <span className="text-sm">{renderItem(item)}</span>
                         </div>
                       ))}
-                      {feature.data.length > 8 && (
-                        <div className="text-xs text-muted-foreground text-center pt-2">
-                          + {feature.data.length - 8} more items
-                        </div>
-                      )}
                     </div>
                   ) : (
                     <ul className="space-y-2">
@@ -128,11 +123,6 @@ export function Results({
                           </span>
                         </li>
                       ))}
-                      {feature.data.length > 8 && (
-                        <li className="text-xs text-muted-foreground text-center pt-2">
-                          + {feature.data.length - 8} more items
-                        </li>
-                      )}
                     </ul>
                   )
                 ) : (
