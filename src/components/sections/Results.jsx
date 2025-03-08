@@ -105,19 +105,19 @@ export function Results({
                           key={idx}
                           className="flex flex-row items-center gap-2 bg-purple-100 p-2 rounded"
                         >
-                          <div className="w-2 h-2 rounded-full"></div>
+                          <div className="w-2 h-2"></div>
                           <span className="text-sm">{renderItem(item)}</span>
                         </div>
                       ))}
                     </div>
                   ) : (
                     <ul className="space-y-2">
-                      {feature.data.slice(0, 8).map((item, idx) => (
+                      {feature.data.map((item, idx) => (
                         <li
                           key={idx}
                           className="flex flex-row items-center gap-2"
                         >
-                          <div className="w-2 h-2 rounded-full bg-gray-500"></div>
+                          <div className="w-2 h-2"></div>
                           <span className="text-sm bg-purple-100 p-2 rounded">
                             {renderItem(item)}
                           </span>
