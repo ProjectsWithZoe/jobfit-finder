@@ -322,6 +322,7 @@ export function Hero() {
           matchedJobs={matchedJobs}
           unmatchedJobs={unmatchedJobs}
           jobRecommendations={fiveJobRecommendations}
+          feature
         />
       )}
     </>

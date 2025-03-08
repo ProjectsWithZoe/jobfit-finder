@@ -102,7 +102,7 @@ export function Results({
                           className={`w-2 h-2 rounded-full
                           )}`}
                         ></div>
-                        <span className="text-sm bg-gray-500 rounded">
+                        <span className="text-sm bg-gray-100 p-2 rounded">
                           {renderItem(item)}
                         </span>
                       </li>
