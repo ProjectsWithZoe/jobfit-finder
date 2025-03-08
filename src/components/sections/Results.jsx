@@ -95,9 +95,9 @@ export function Results({
               </div>
               <div>
                 {feature.data.length > 0 ? (
-                  <ul className="space-y-2">
+                  <div className="flex flex-wrap gap-2">
                     {feature.data.slice(0, 8).map((item, idx) => (
-                      <li
+                      <div
                         key={idx}
                         className="flex flex-row items-center gap-2"
                       >
@@ -105,17 +105,17 @@ export function Results({
                           className={`w-2 h-2 rounded-full
                           )}`}
                         ></div>
-                        <span className="text-sm bg-purple-200 p-2 rounded">
+                        <span className="text-sm bg-purple-100 p-2 rounded">
                           {renderItem(item)}
                         </span>
-                      </li>
+                      </div>
                     ))}
                     {feature.data.length > 8 && (
                       <li className="text-xs text-muted-foreground text-center pt-2 ">
                         + {feature.data.length - 8} more items
                       </li>
                     )}
-                  </ul>
+                  </div>
                 ) : (
                   <div className="flex items-center justify-center h-24 text-muted-foreground text-sm">
                     No data available
