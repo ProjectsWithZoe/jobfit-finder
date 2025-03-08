@@ -1,22 +1,37 @@
 import React, { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
+import { Link, useNavigate } from "react-router-dom";
+import { getAuth, onAuthStateChanged, signOut } from "firebase/auth";
 
 export function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [user, setUser] = useState(null);
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const navigate = useNavigate();
+  const auth = getAuth();
 
   useEffect(() => {
     const handleScroll = () => {
-      if (window.scrollY > 20) {
-        setIsScrolled(true);
-      } else {
-        setIsScrolled(false);
-      }
+      setIsScrolled(window.scrollY > 20);
     };
-
     window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
+
+    const unsubscribe = onAuthStateChanged(auth, (user) => {
+      setUser(user); // Set logged-in user
+    });
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+      unsubscribe();
+    };
   }, []);
+
+  const handleSignOut = async () => {
+    await signOut(auth);
+    setUser(null);
+    navigate("/login"); // Redirect to login after sign-out
+  };
 
   return (
     <nav
@@ -57,6 +72,45 @@ export function Navbar() {
           >
             Testimonials
           </a>
+          {/* Account Button */}
+          <div className="relative">
+            {user ? (
+              // If logged in, show dropdown
+              <>
+                <button
+                  className="text-sm font-medium hover:text-primary"
+                  onClick={() => setIsDropdownOpen(!isDropdownOpen)}
+                >
+                  Account
+                </button>
+
+                {isDropdownOpen && (
+                  <div className="absolute right-0 mt-4 w-75 bg-white border border-purple-500 rounded-lg shadow-lg">
+                    <div className="px-4 py-2 text-sm text-gray-900">
+                      {user.email}
+                    </div>
+                    <button className="flex w-full px-4 py-2 text-sm text-purple-500 hover:bg-purple-100">
+                      My Subscription
+                    </button>
+                    <button
+                      className="block w-full text-left px-4 py-2 text-sm text-red-500 hover:bg-red-100"
+                      onClick={handleSignOut}
+                    >
+                      Sign Out
+                    </button>
+                  </div>
+                )}
+              </>
+            ) : (
+              // If not logged in, redirect to login
+              <Link
+                to="/login"
+                className="text-sm font-medium hover:text-primary"
+              >
+                Account
+              </Link>
+            )}
+          </div>
 
           <Button size="sm">Try Now</Button>
         </div>
@@ -95,11 +149,26 @@ export function Navbar() {
             How it Works
           </a>
           <a
+            href="#pricing"
+            className="text-sm font-medium px-4 py-2 hover:bg-primary/10 rounded-md transition-colors"
+            onClick={() => setIsMobileMenuOpen(false)}
+          >
+            Pricing
+          </a>
+          <a
             href="#testimonials"
             className="text-sm font-medium px-4 py-2 hover:bg-primary/10 rounded-md transition-colors"
             onClick={() => setIsMobileMenuOpen(false)}
           >
             Testimonials
+          </a>
+          {/*fix mobile nav*/}
+          <a
+            href="#account"
+            className="text-sm font-medium px-4 py-2 hover:bg-primary/10 rounded-md transition-colors"
+            onClick={() => setIsMobileMenuOpen(false)}
+          >
+            Account
           </a>
           <Button className="w-full" onClick={() => setIsMobileMenuOpen(false)}>
             Try Now

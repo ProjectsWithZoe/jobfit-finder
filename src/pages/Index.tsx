@@ -9,6 +9,7 @@ import { Footer } from "@/components/sections/Footer";
 import { RewardTracker } from "@/components/ui/RewardTracker";
 import { toast } from "sonner";
 import { Pricing } from "@/components/sections/Pricing";
+import { Results } from "@/components/sections/Results";
 
 const Index = () => {
   useEffect(() => {
@@ -30,6 +31,7 @@ const Index = () => {
       <Navbar />
       <main>
         <Hero />
+        <Results />
         <Features />
         <Pricing />
         <HowItWorks />

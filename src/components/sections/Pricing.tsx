@@ -3,8 +3,11 @@ import React from "react";
 import { BarChart, Percent, Search, Users, Crown, Check } from "lucide-react";
 import { Button } from "../ui/button";
 import { FeatureCard } from "../ui/FeatureCard";
+import { useNavigate } from "react-router-dom";
 
 export function Pricing() {
+  const navigate = useNavigate();
+
   const pricingPlans = [
     {
       title: "FREE",
@@ -17,7 +20,7 @@ export function Pricing() {
 
       buttonText: "Try for free",
       onButtonClick: () => {
-        alert("Free clicked!");
+        navigate("/#jobDesc");
       },
     },
     {
@@ -36,7 +39,7 @@ export function Pricing() {
     },
     {
       title: "PRO",
-      price: "$25.99",
+      price: "$24.99",
       description: [
         "Discover required skills for specific roles",
         "Detailed analytics on job fit",
@@ -79,7 +82,11 @@ export function Pricing() {
 
                   <h3 className="text-xl font-bold mb-2">{plan.title}</h3>
                   <div className="text-3xl font-bold">{plan.price}</div>
-                  <div className="text-sm opacity-80 mt-1">per month</div>
+                  {plan.title == "FREE" ? (
+                    <div className="text-sm opacity-80 mt-1">always</div>
+                  ) : (
+                    <div className="text-sm opacity-80 mt-1">one-time fee</div>
+                  )}
                 </div>
 
                 {/* Features List */}
