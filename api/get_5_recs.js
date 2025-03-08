@@ -39,7 +39,7 @@ export default async function handler(req, res) {
       ],
       temperature: 0,
     });
-    const parsedResponse = JSON.parse(response.choices[0].message.content);
+    const parsedResponse = response.choices[0].message.content;
     const jobRecs = parsedResponse["jobRecommendations"];
     res.status(200).json({ jobRecs });
   } else {
