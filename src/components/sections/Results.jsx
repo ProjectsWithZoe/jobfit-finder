@@ -175,7 +175,7 @@ export function ResultsPro({
     },
     {
       icon: BookOpen,
-      title: "Learning Resources",
+      title: "Resources",
       skills: false,
       learningResources: true,
       description: "Suggested learning resources based on missing skills.",
@@ -256,25 +256,7 @@ export function ResultsPro({
                           className="flex flex-row items-center gap-2"
                         >
                           <span className="text-sm bg-purple-100 p-2 rounded">
-                            {learningResources &&
-                            Array.isArray(learningResources)
-                              ? learningResources.map((resource, index) => {
-                                  const [name, url] =
-                                    Object.entries(resource)[0]; // Extract key-value pair
-                                  return (
-                                    <div key={index}>
-                                      <a
-                                        href={url}
-                                        target="_blank"
-                                        rel="noopener noreferrer"
-                                        className="text-blue-500"
-                                      >
-                                        {name}
-                                      </a>
-                                    </div>
-                                  );
-                                })
-                              : renderItem(item)}
+                            {renderItem(item)}
                           </span>
                         </li>
                       ))}
