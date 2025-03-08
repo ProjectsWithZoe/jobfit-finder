@@ -19,6 +19,7 @@ export function Results({
     {
       icon: CheckCircle,
       title: "Matched Skills",
+      skills: true,
       description:
         "Skills from your CV that match the job description requirements.",
       data: matchedJobs,
@@ -28,6 +29,7 @@ export function Results({
     {
       icon: XCircle,
       title: "Missing Skills",
+      skills: true,
       description: "Skills required by the job that weren't found in your CV.",
       data: unmatchedJobs,
       color: "text-red-500",
@@ -36,6 +38,7 @@ export function Results({
     {
       icon: BookOpen,
       title: "Job Recommendations",
+      skills: false,
       description: "Suggested job roles based on your current skill set.",
       data: jobRecommendations,
       color: "text-blue-500",
@@ -68,7 +71,7 @@ export function Results({
           <h2 className="text-3xl md:text-4xl font-bold mb-4">Your Results</h2>
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
             Review your skill matches, missing qualifications, and personalized
-            job recommendations
+            job recommendations.
           </p>
         </div>
 
@@ -95,27 +98,43 @@ export function Results({
               </div>
               <div>
                 {feature.data.length > 0 ? (
-                  <div className="flex flex-wrap gap-2">
-                    {feature.data.slice(0, 8).map((item, idx) => (
-                      <div
-                        key={idx}
-                        className="flex flex-row items-center gap-2"
-                      >
+                  feature.skills ? (
+                    <div className="flex flex-wrap gap-2">
+                      {feature.data.slice(0, 8).map((item, idx) => (
                         <div
-                          className={`w-2 h-2 rounded-full
-                          )}`}
-                        ></div>
-                        <span className="text-sm bg-purple-100 p-2 rounded">
-                          {renderItem(item)}
-                        </span>
-                      </div>
-                    ))}
-                    {feature.data.length > 8 && (
-                      <li className="text-xs text-muted-foreground text-center pt-2 ">
-                        + {feature.data.length - 8} more items
-                      </li>
-                    )}
-                  </div>
+                          key={idx}
+                          className="flex flex-row items-center gap-2 bg-purple-100 p-2 rounded"
+                        >
+                          <div className="w-2 h-2 rounded-full bg-gray-500"></div>
+                          <span className="text-sm">{renderItem(item)}</span>
+                        </div>
+                      ))}
+                      {feature.data.length > 8 && (
+                        <div className="text-xs text-muted-foreground text-center pt-2">
+                          + {feature.data.length - 8} more items
+                        </div>
+                      )}
+                    </div>
+                  ) : (
+                    <ul className="space-y-2">
+                      {feature.data.slice(0, 8).map((item, idx) => (
+                        <li
+                          key={idx}
+                          className="flex flex-row items-center gap-2"
+                        >
+                          <div className="w-2 h-2 rounded-full bg-gray-500"></div>
+                          <span className="text-sm bg-purple-100 p-2 rounded">
+                            {renderItem(item)}
+                          </span>
+                        </li>
+                      ))}
+                      {feature.data.length > 8 && (
+                        <li className="text-xs text-muted-foreground text-center pt-2">
+                          + {feature.data.length - 8} more items
+                        </li>
+                      )}
+                    </ul>
+                  )
                 ) : (
                   <div className="flex items-center justify-center h-24 text-muted-foreground text-sm">
                     No data available
