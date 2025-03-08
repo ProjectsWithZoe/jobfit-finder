@@ -317,13 +317,13 @@ export function Hero() {
         </div>
       </section>
       {/* Add the Results component with data */}
-      {(matchedJobs.length > 0 || unmatchedJobs.length > 0) && (
+      {/*{(matchedJobs.length > 0 || unmatchedJobs.length > 0) && (
         <Results
           matchedJobs={matchedJobs}
           unmatchedJobs={unmatchedJobs}
           jobRecommendations={fiveJobRecommendations}
         />
-      )}
+      )}*/}
     </>
   );
 }
