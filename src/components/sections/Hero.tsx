@@ -134,7 +134,8 @@ export function Hero() {
       });
 
       const data = await response.json();
-      console.log(data);
+      const results = data.jobRecs;
+      console.log(results);
     } catch (error) {
       setError("An error occurred. Please try again.");
     }
