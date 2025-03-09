@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { sendPasswordResetEmail, getAuth } from "firebase/auth";
+import { auth } from "../firebaseAuth";
 //import { Button } from "./Button";
 
 export function ForgotPassword() {
@@ -7,7 +8,6 @@ export function ForgotPassword() {
   const [message, setMessage] = useState("");
   const [error, setError] = useState("");
   const [isLoading, setIsLoading] = useState(false);
-  const auth = getAuth();
 
   const handleResetPassword = async (e) => {
     e.preventDefault();

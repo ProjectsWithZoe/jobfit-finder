@@ -1,11 +1,11 @@
 import { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import {
-  getAuth,
   signInWithEmailAndPassword,
   createUserWithEmailAndPassword,
   sendEmailVerification,
 } from "firebase/auth";
+import { auth } from "../firebaseAuth";
 
 export function Login() {
   const navigate = useNavigate();
@@ -15,7 +15,6 @@ export function Login() {
   const [error, setError] = useState("");
   const [success, setSuccess] = useState(false);
   const [isDropdownOpen, setDropdownOpen] = useState(false);
-  const auth = getAuth();
 
   const toggleDropdown = () => {
     setDropdownOpen(!isDropdownOpen);
