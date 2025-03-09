@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useSearchParams, useNavigate } from "react-router-dom";
 import { confirmPasswordReset } from "firebase/auth";
-import { auth } from "../firebaseAuth";
+import { auth } from "./firebaseAuth";
 //import { Button } from "./Button";
 
 export function ResetPassword() {

@@ -5,7 +5,7 @@ import {
   createUserWithEmailAndPassword,
   sendEmailVerification,
 } from "firebase/auth";
-import { auth } from "../firebaseAuth";
+import { auth } from "./firebaseAuth";
 
 export function Login() {
   const navigate = useNavigate();
@@ -75,7 +75,11 @@ export function Login() {
       setSuccess(true);
       setIsLoading(false);
     } catch (err) {
-      setError(err instanceof Error ? err.message : "An error occurred");
+      console.log("Email already in use");
+      console.log(err);
+      setError(
+        err instanceof Error ? "Email already in use" : "An error occurred"
+      );
       setIsLoading(false);
     }
   };

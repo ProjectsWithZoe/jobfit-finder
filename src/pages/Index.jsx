@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { Navbar } from "@/components/layout/Navbar";
 import { Hero } from "@/components/sections/Hero";
 import { Features } from "@/components/sections/Features";
@@ -9,9 +9,27 @@ import { Footer } from "@/components/sections/Footer";
 import { RewardTracker } from "@/components/ui/RewardTracker";
 import { toast } from "sonner";
 import { Pricing } from "@/components/sections/Pricing";
-import { Results } from "@/components/sections/Results";
+import { onAuthStateChanged } from "firebase/auth";
+import { auth } from "./firebaseAuth";
 
 const Index = () => {
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [userEmail, setUserEmail] = useState(null);
+
+  useEffect(() => {
+    const unsubscribe = auth.onAuthStateChanged((user) => {
+      if (user) {
+        setIsAuthenticated(true);
+        setUserEmail(user.email);
+      } else {
+        setIsAuthenticated(false);
+        setUserEmail(null);
+      }
+    });
+
+    return () => unsubscribe();
+  }, []);
+
   useEffect(() => {
     // Welcome toast for new visitors
     const hasVisited = localStorage.getItem("hasVisited");
@@ -28,7 +46,7 @@ const Index = () => {
 
   return (
     <div className="min-h-screen w-full">
-      <Navbar />
+      <Navbar isAuthenticated={isAuthenticated} userEmail={userEmail} />
       <main>
         <Hero />
         <Features />

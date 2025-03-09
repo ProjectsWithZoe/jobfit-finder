@@ -3,7 +3,7 @@ import { Button } from "@/components/ui/button";
 import { Link, useNavigate } from "react-router-dom";
 import { getAuth, onAuthStateChanged, signOut } from "firebase/auth";
 
-export function Navbar() {
+export function Navbar({ isAuthenticated, userEmail }) {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [user, setUser] = useState(null);
@@ -17,13 +17,13 @@ export function Navbar() {
     };
     window.addEventListener("scroll", handleScroll);
 
-    const unsubscribe = onAuthStateChanged(auth, (user) => {
+    /*const unsubscribe = onAuthStateChanged(auth, (user) => {
       setUser(user); // Set logged-in user
-    });
+    });*/
 
     return () => {
       window.removeEventListener("scroll", handleScroll);
-      unsubscribe();
+      //unsubscribe();
     };
   }, []);
 
@@ -41,9 +41,9 @@ export function Navbar() {
     >
       <div className="max-w-7xl mx-auto flex items-center justify-between">
         <div className="flex items-center">
-          <a href="/" className="text-xl font-bold">
+          <Link to="/" className="text-xl font-bold">
             <span className="text-primary">Match</span>Me
-          </a>
+          </Link>
         </div>
 
         {/* Desktop menu */}
@@ -74,7 +74,7 @@ export function Navbar() {
           </a>
           {/* Account Button */}
           <div className="relative">
-            {user ? (
+            {isAuthenticated ? (
               // If logged in, show dropdown
               <>
                 <button
@@ -87,7 +87,7 @@ export function Navbar() {
                 {isDropdownOpen && (
                   <div className="absolute right-0 mt-4 w-75 bg-white border border-purple-500 rounded-lg shadow-lg">
                     <div className="px-4 py-2 text-sm text-gray-900">
-                      {user.email}
+                      {userEmail}
                     </div>
                     <button className="flex w-full px-4 py-2 text-sm text-purple-500 hover:bg-purple-100">
                       My Subscription
