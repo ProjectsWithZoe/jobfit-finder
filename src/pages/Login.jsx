@@ -45,6 +45,7 @@ export function Login() {
         password
       );
       const user = userCredential.user;
+      console.log(userCredential);
 
       if (!user.emailVerified) {
         setError("Please verify your email before logging in.");
@@ -72,6 +73,7 @@ export function Login() {
         password
       );
       const user = userCredential.user;
+      console.log(userCredential);
 
       await sendEmailVerification(user);
       setSuccess(true);
@@ -169,7 +171,6 @@ export function Login() {
           </Link>
         </div>
       </div>
-      {isDropdownOpen && <div> Hi, Hello</div>}
     </div>
   );
 }
