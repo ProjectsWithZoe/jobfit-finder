@@ -221,7 +221,6 @@ export function ResultsPro({
               className="animate-slide-up border border-black-50 shadow-lg rounded-lg bg-gray-50 p-4"
               style={{
                 animationDelay: `${index * 0.1}s`,
-                borderTopColor: feature.color.replace("text-", ""),
               }}
             >
               <div className="pb-2">
@@ -242,7 +241,7 @@ export function ResultsPro({
                       {feature.data.map((item, idx) => (
                         <div
                           key={idx}
-                          className="flex flex-row items-center gap-2 bg-purple-100 p-2"
+                          className="flex flex-row items-center gap-2 bg-purple-100 rounded-full p-2"
                         >
                           <span className="text-sm">{renderItem(item)}</span>
                         </div>
@@ -250,16 +249,35 @@ export function ResultsPro({
                     </div>
                   ) : (
                     <ul className="space-y-2">
-                      {feature.data.map((item, idx) => (
-                        <li
-                          key={idx}
-                          className="flex flex-row items-center gap-2"
-                        >
-                          <span className="text-sm bg-purple-100 p-2 rounded">
-                            {renderItem(item)}
-                          </span>
-                        </li>
-                      ))}
+                      {feature.learningResources
+                        ? feature.data.map((item, idx) => {
+                            const [key, value] = Object.entries(item)[0]; // Extract key-value pair
+                            return (
+                              <li
+                                key={idx}
+                                className="flex flex-row items-center gap-2"
+                              >
+                                <a
+                                  href={value}
+                                  target="_blank"
+                                  rel="noopener noreferrer"
+                                  className="text-blue-500 underline"
+                                >
+                                  {key} - Link to {key} training
+                                </a>
+                              </li>
+                            );
+                          })
+                        : feature.data.map((item, idx) => (
+                            <li
+                              key={idx}
+                              className="flex flex-row items-center gap-2"
+                            >
+                              <span className="text-sm bg-purple-100 p-2 rounded-full">
+                                {renderItem(item)}
+                              </span>
+                            </li>
+                          ))}
                     </ul>
                   )
                 ) : (

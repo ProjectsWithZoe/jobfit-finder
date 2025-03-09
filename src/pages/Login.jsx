@@ -24,7 +24,6 @@ export function Login() {
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged((user) => {
       if (user && user.emailVerified) {
-        console.log("hi");
         setDropdownOpen(true);
         navigate("/");
       }
@@ -45,7 +44,6 @@ export function Login() {
         password
       );
       const user = userCredential.user;
-      console.log(userCredential);
 
       if (!user.emailVerified) {
         setError("Please verify your email before logging in.");
@@ -73,7 +71,6 @@ export function Login() {
         password
       );
       const user = userCredential.user;
-      console.log(userCredential);
 
       await sendEmailVerification(user);
       setSuccess(true);

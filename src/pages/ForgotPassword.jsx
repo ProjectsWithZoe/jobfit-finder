@@ -30,12 +30,15 @@ export function ForgotPassword() {
       <div className="md:w-[80%] max-w-md space-y-8">
         <h2 className="text-3xl font-bold text-center">Reset Password</h2>
         {message && (
-          <div className="p-4 bg-green-500 text-white">{message}</div>
+          <div className="p-4 rounded-full bg-green-500 text-white">
+            {message}
+          </div>
         )}
         {error && <div className="p-4 bg-red-500 text-white">{error}</div>}
         <form onSubmit={handleResetPassword} className="space-y-6">
+          <label>Email: </label>
           <input
-            className="w-full px-4 py-2 rounded-lg bg-gray-800 border border-gray-700',
+            className="w-full px-2 py-2 rounded-lg bg-purple-100 border border-gray-700',
           'focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent',
           'placeholder-gray-500"
             label="Enter your email"
@@ -44,7 +47,11 @@ export function ForgotPassword() {
             value={email}
             onChange={(e) => setEmail(e.target.value)}
           />
-          <button type="submit" disabled={isLoading}>
+          <button
+            type="submit"
+            className="text-purple bg-purple-400 p-4 rounded-full"
+            disabled={isLoading}
+          >
             Send Reset Email
           </button>
         </form>
