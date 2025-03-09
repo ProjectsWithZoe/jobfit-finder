@@ -4,6 +4,7 @@ import { BarChart, Percent, Search, Users, Crown, Check } from "lucide-react";
 import { Button } from "../ui/button";
 import { FeatureCard } from "../ui/FeatureCard";
 import { useNavigate } from "react-router-dom";
+import { auth } from "../../pages/firebaseAuth";
 
 export function Pricing() {
   const navigate = useNavigate();
@@ -105,7 +106,16 @@ export function Pricing() {
                       plan.isPopular ? "bg-purple-800 hover:bg-purple-400" : ""
                     }`}
                   >
-                    <a href={plan.paymentLink}>{plan.buttonText}</a>
+                    <a
+                      target="_blank"
+                      href={
+                        plan.paymentLink +
+                        "?prefilled_email=" +
+                        auth.currentUser.email
+                      }
+                    >
+                      {plan.buttonText}
+                    </a>
                   </Button>
                 </div>
               </div>
