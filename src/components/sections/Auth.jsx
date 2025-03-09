@@ -27,10 +27,7 @@ const Auth = ({ onAuthSuccess }) => {
       snapshot.forEach((doc) => {
         if (doc.exists() && doc.data().subscription) {
           onAuthSuccess(true);
-          console.log(
-            "User is authenticated with subscription:",
-            doc.data().subscription
-          );
+          console.log(doc.data().subscription);
         }
       });
     });

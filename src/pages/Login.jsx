@@ -5,7 +5,8 @@ import {
   createUserWithEmailAndPassword,
   sendEmailVerification,
 } from "firebase/auth";
-import { auth } from "./firebaseAuth";
+import { auth, db } from "./firebaseAuth";
+import { addDoc, collection } from "firebase/firestore";
 
 export function Login() {
   const navigate = useNavigate();
@@ -72,6 +73,12 @@ export function Login() {
       const user = userCredential.user;
 
       await sendEmailVerification(user);
+      await addDoc(collection(db, "users"), {
+        email: user.email,
+        userId: auth.currentUser.uid,
+        subscription: "free",
+      });
+
       setSuccess(true);
       setIsLoading(false);
     } catch (err) {

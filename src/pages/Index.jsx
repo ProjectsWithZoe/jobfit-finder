@@ -10,7 +10,8 @@ import { RewardTracker } from "@/components/ui/RewardTracker";
 import { toast } from "sonner";
 import { Pricing } from "@/components/sections/Pricing";
 import { onAuthStateChanged } from "firebase/auth";
-import { auth } from "./firebaseAuth";
+import { auth, db } from "./firebaseAuth";
+import { collection, query, where, onSnapshot } from "firebase/firestore";
 
 const Index = () => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -19,8 +20,10 @@ const Index = () => {
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged((user) => {
       if (user) {
+        console.log(user.email);
         setIsAuthenticated(true);
         setUserEmail(user.email);
+        checkUserSubscription(user.email);
       } else {
         setIsAuthenticated(false);
         setUserEmail(null);
@@ -29,6 +32,25 @@ const Index = () => {
 
     return () => unsubscribe();
   }, []);
+
+  const checkUserSubscription = (email) => {
+    console.log(email);
+    const userRef = collection(db, "users");
+    console.log(userRef);
+    const q = query(userRef, where("email", "==", email));
+    console.log(q);
+
+    const unsubscribeFirestore = onSnapshot(q, (snapshot) => {
+      snapshot.forEach((doc) => {
+        if (doc.exists() && doc.data().subscription) {
+          onAuthSuccess(true);
+          console.log(doc.data().subscription);
+        }
+      });
+    });
+
+    return unsubscribeFirestore; // Ensure proper cleanup
+  };
 
   useEffect(() => {
     // Welcome toast for new visitors

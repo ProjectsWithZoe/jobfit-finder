@@ -19,9 +19,7 @@ export function Pricing() {
       ],
 
       buttonText: "Try for free",
-      onButtonClick: () => {
-        navigate("/#jobDesc");
-      },
+      paymentLink: "",
     },
     {
       title: "PREMIUM",
@@ -33,9 +31,7 @@ export function Pricing() {
       ],
       buttonText: "Get Premium",
       isPopular: true,
-      onButtonClick: () => {
-        alert("Premium clicked!");
-      },
+      paymentLink: "https://buy.stripe.com/test_aEU6qu2rg7HsamQfYY",
     },
     {
       title: "PRO",
@@ -46,9 +42,7 @@ export function Pricing() {
         "AI-driven career guidance",
       ],
       buttonText: "Get Pro",
-      onButtonClick: () => {
-        alert("Pro clicked!");
-      },
+      paymentLink: "https://buy.stripe.com/test_3cs3ei4zoaTEdz23cd",
     },
   ];
 
@@ -107,12 +101,11 @@ export function Pricing() {
                 {/* Button */}
                 <div className="p-6 pt-0 mt-auto">
                   <Button
-                    onClick={plan.onButtonClick}
                     className={`w-full py-5 text-lg font-medium ${
                       plan.isPopular ? "bg-purple-800 hover:bg-purple-400" : ""
                     }`}
                   >
-                    {plan.buttonText}
+                    <a href={plan.paymentLink}>{plan.buttonText}</a>
                   </Button>
                 </div>
               </div>
