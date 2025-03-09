@@ -257,13 +257,14 @@ export function ResultsPro({
                                 key={idx}
                                 className="flex flex-row items-center gap-2"
                               >
+                                {key}
                                 <a
                                   href={value}
                                   target="_blank"
                                   rel="noopener noreferrer"
                                   className="text-blue-500 underline"
                                 >
-                                  {key} - Link to {key} training
+                                  Link to {key} training
                                 </a>
                               </li>
                             );
