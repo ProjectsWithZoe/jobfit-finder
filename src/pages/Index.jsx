@@ -43,7 +43,6 @@ const Index = () => {
     const unsubscribeFirestore = onSnapshot(q, (snapshot) => {
       snapshot.forEach((doc) => {
         if (doc.exists() && doc.data().subscription) {
-          onAuthSuccess(true);
           console.log(doc.data().subscription);
         }
       });
