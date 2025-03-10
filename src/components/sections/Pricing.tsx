@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 
 import { BarChart, Percent, Search, Users, Crown, Check } from "lucide-react";
 import { Button } from "../ui/button";
@@ -6,7 +6,7 @@ import { FeatureCard } from "../ui/FeatureCard";
 import { useNavigate } from "react-router-dom";
 import { auth } from "../../pages/firebaseAuth";
 
-export function Pricing() {
+export function Pricing({ isAuthenticated, userEmail }) {
   const navigate = useNavigate();
 
   const pricingPlans = [
@@ -108,11 +108,7 @@ export function Pricing() {
                   >
                     <a
                       target="_blank"
-                      href={
-                        plan.paymentLink +
-                        "?prefilled_email=" +
-                        auth.currentUser.email
-                      }
+                      href={plan.paymentLink + "?prefilled_email=" + userEmail}
                     >
                       {plan.buttonText}
                     </a>

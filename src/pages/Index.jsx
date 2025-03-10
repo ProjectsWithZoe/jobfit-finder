@@ -72,7 +72,7 @@ const Index = () => {
       <main>
         <Hero />
         <Features />
-        <Pricing />
+        <Pricing isAuthenticated={isAuthenticated} userEmail={userEmail} />
         <HowItWorks />
 
         {/* Rewards section */}
