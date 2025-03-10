@@ -18,6 +18,7 @@ export default async function handler(req, res) {
 
   try {
     event = stripe.webhooks.constructEvent(req.body, signature, endpointSecret);
+    console.log("Webhook event successfully verified");
   } catch (error) {
     console.error("Webhook signature verification failed", error.message);
     res.status(400).send("Webhook error", error.message);
@@ -32,7 +33,7 @@ export default async function handler(req, res) {
       console.log("Payment completed for: " + userEmail);
 
       try {
-        const q = db.collection("users").where("userId", "==", userId);
+        const q = db.collection("users").where("userId", "==", userEmail);
         const querySnapshot = await q.get();
 
         if (querySnapshot.empty) {
