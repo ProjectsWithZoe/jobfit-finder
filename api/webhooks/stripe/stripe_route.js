@@ -1,5 +1,5 @@
 import Stripe from "stripe";
-import { auth, db } from "../../../src/pages/firebaseAuth";
+import { auth, db } from "../../../src/pages/firebaseAuth.js";
 import dotenv from "dotenv";
 
 dotenv.config();
