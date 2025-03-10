@@ -32,14 +32,6 @@ export default async function handler(req, res) {
       console.log("Payment completed for: " + userEmail);
 
       try {
-        const userRecord = await auth.getUserByEmail(userEmail);
-        if (!userRecord) {
-          console.log(
-            "User with email " + userEmail + " not found in database"
-          );
-          return res.status(404).send("User not found in database");
-        }
-        const userId = userRecord.uid;
         const q = db.collection("users").where("userId", "==", userId);
         const querySnapshot = await q.get();
 
@@ -49,8 +41,9 @@ export default async function handler(req, res) {
         }
 
         querySnapshot.forEach(async (doc) => {
+          const plan = session.amount_total === 1999 ? "premium" : "pro";
           if (event.data.object.amount == "1999") {
-            await doc.ref.set({ subscription: "premium" }, { merge: true });
+            await doc.ref.set({ subscription: plan }, { merge: true });
             console.log("Updated access for: " + userEmail);
           } else {
             await doc.ref.set({ subscription: "pro" }, { merge: true });

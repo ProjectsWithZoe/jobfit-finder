@@ -102,6 +102,9 @@ export function Pricing({ isAuthenticated, userEmail }) {
                 {/* Button */}
                 <div className="p-6 pt-0 mt-auto">
                   <Button
+                    onClick={() => {
+                      console.log(userEmail);
+                    }}
                     className={`w-full py-5 text-lg font-medium ${
                       plan.isPopular ? "bg-purple-800 hover:bg-purple-400" : ""
                     }`}
