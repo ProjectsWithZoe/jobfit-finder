@@ -181,7 +181,7 @@ export function ResultsPro({
       description: "Suggested learning resources based on missing skills.",
       data: learningResources,
       color: "text-yellow-500",
-      textColor: "blue",
+      textColor: "yellow",
     },
   ];
 
@@ -226,7 +226,9 @@ export function ResultsPro({
               <div className="pb-2">
                 <div className="flex items-center gap-2">
                   <feature.icon className={`h-6 w-6 ${feature.color}`} />
-                  <div className={`text-xl text-${feature.textColor}-500`}>
+                  <div
+                    className={`text-xl text-${feature.textColor}-500 rounded-full border border-${feature.textColor}-500`}
+                  >
                     {feature.title}
                   </div>
                 </div>
@@ -257,14 +259,14 @@ export function ResultsPro({
                                 key={idx}
                                 className="flex flex-row items-center gap-2 text-sm"
                               >
-                                {key}
+                                {key} -
                                 <a
                                   href={value}
                                   target="_blank"
                                   rel="noopener noreferrer"
                                   className="text-blue-500 underline text-sm"
                                 >
-                                  - Link to {key} training
+                                  Link to {key} training
                                 </a>
                               </li>
                             );
