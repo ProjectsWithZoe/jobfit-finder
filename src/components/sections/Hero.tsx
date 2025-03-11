@@ -33,16 +33,16 @@ export function Hero({ subscription }) {
       });
 
       const data = await response.json();
-      console.log("Raw data:", data);
+      //console.log("Raw data:", data);
 
       const jobSkillsArray = data.jobSkills
         ? data.jobSkills.map((skill) => skill.trim().toLowerCase())
         : [];
       setJobDescriptionSkills(jobSkillsArray);
-      console.log("Processed job skills:", jobSkillsArray);
+      //console.log("Processed job skills:", jobSkillsArray);
     } catch (error) {
-      console.error("Detailed error:", error);
-      console.error("Error message:", error.message);
+      //console.error("Detailed error:", error);
+      //console.error("Error message:", error.message);
       setError("An error occurred. Please try again.");
     }
   };
@@ -58,12 +58,12 @@ export function Hero({ subscription }) {
         body: JSON.stringify({ cv }),
       });
       const data = await response.json();
-      console.log("Raw data:", data);
+      //console.log("Raw data:", data);
       const cvSkillsArray = data.cvSkills
         ? data.cvSkills.map((skill) => skill.trim().toLowerCase())
         : [];
       setCvSkills(cvSkillsArray);
-      console.log("Processed cv skills:", cvSkillsArray);
+      //console.log("Processed cv skills:", cvSkillsArray);
 
       if (cvSkillsArray.length > 0) {
         get_5_recs(cvSkillsArray);
@@ -136,7 +136,7 @@ export function Hero({ subscription }) {
 
       const data = await response.json();
       const results = data.jobRecs;
-      console.log(results);
+      //console.log(results);
       setFiveJobRecommendations(results);
     } catch (error) {
       setError("An error occurred. Please try again.");
@@ -147,8 +147,8 @@ export function Hero({ subscription }) {
     if (!cvSkills || !unmatchedSkills) return;
     setLoading(true);
     try {
-      console.log("Sending to API - cvSkills:", cvSkills);
-      console.log("Sending to API - unmatchedJobs:", unmatchedJobs);
+      //console.log("Sending to API - cvSkills:", cvSkills);
+      //console.log("Sending to API - unmatchedJobs:", unmatchedJobs);
       const response = await fetch("/api/get_recs_resources", {
         method: "POST",
         headers: {
@@ -165,14 +165,14 @@ export function Hero({ subscription }) {
       const learningResources = data.learningResources;
       setTenJobRecommendations(results);
       setLearningResources(learningResources);
-      console.log(data);
+      //console.log(data);
     } catch (error) {
       setError("An error occurred. Please try again.");
     }
   };
 
   useEffect(() => {
-    console.log(jobDescriptionSkills);
+    //console.log(jobDescriptionSkills);
     analyzeJobDesc();
     return () => {
       setMatchPercentage(0);
@@ -180,50 +180,13 @@ export function Hero({ subscription }) {
   }, [jobDescription]);
 
   useEffect(() => {
-    console.log(cvSkills);
+    //console.log(cvSkills);
     analyzeUserCv();
 
     return () => {
       setMatchPercentage(0);
     };
   }, [cv]);
-
-  useEffect(() => {
-    console.log("Updated Job Skills:", jobDescriptionSkills);
-  }, [jobDescriptionSkills]); // Runs whenever jobDescriptionSkills changes
-
-  useEffect(() => {
-    console.log("Updated CV Skills:", cvSkills);
-  }, [cvSkills]); // Runs whenever cvSkills changes
-
-  useEffect(() => {
-    console.log("Missing CV Skills:", unmatchedJobs);
-  }, [unmatchedJobs]); // Runs whenever cvSkills changes
-
-  /*const analyzeGetPercentage = async (jobDescription, cv) => {
-    setLoading(true);
-    try {
-      const response = await fetch("http://localhost:5000/api/get-percentage", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ jobDescription, cv }),
-      });
-      const data = await response.json();
-      setMatchPercentage(data["matchPercentage"]);
-      console.log(data["matchPercentage"]);
-    } catch (error) {
-      setError("An error occurred. Please try again.");
-    }
-    setLoading(false);
-  };
-
-  useEffect(() => {
-    if (jobDescription && cv) {
-      analyzeGetPercentage(jobDescription, cv);
-    }
-  }, [jobDescription, cv]);*/
 
   return (
     <>
