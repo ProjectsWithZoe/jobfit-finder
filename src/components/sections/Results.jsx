@@ -66,7 +66,7 @@ export function ResultsPremium({
   };
 
   return (
-    <section id="results" className="py-24 px-6 bg-accent/50">
+    <section id="results" className="py-4 px-6 bg-accent/50">
       <div className="max-w-7xl mx-auto">
         <div className="text-center mb-16 animate-fade-in">
           <h2 className="text-3xl md:text-4xl font-bold mb-4">Your Results</h2>
@@ -204,7 +204,7 @@ export function ResultsPro({
   };
 
   return (
-    <section id="results" className="py-24 px-6 bg-accent/50">
+    <section id="results" className="py-4 px-6 bg-accent/50">
       <div className="max-w-7xl mx-auto">
         <div className="text-center mb-16 animate-fade-in">
           <h2 className="text-3xl md:text-4xl font-bold mb-4">Your Results</h2>
@@ -226,9 +226,7 @@ export function ResultsPro({
               <div className="pb-2">
                 <div className="flex items-center gap-2">
                   <feature.icon className={`h-6 w-6 ${feature.color}`} />
-                  <div
-                    className={`text-xl text-${feature.textColor}-500 rounded-full border border-${feature.textColor}-500`}
-                  >
+                  <div className={`text-lg p-2 text-${feature.textColor}-500`}>
                     {feature.title}
                   </div>
                 </div>
