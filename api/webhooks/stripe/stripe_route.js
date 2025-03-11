@@ -30,7 +30,7 @@ export default async function handler(req, res) {
     console.log("Webhook event successfully verified");
   } catch (error) {
     console.error("Webhook signature verification failed", error.message);
-    res.status(400).send("Webhook error", error.message);
+    return res.status(400).send("Webhook error", error.message);
   }
 
   console.log("✅ Success:", event.id);
@@ -62,10 +62,10 @@ export default async function handler(req, res) {
             console.log("Updated access for: " + userEmail);
           }
         });
-        res.status(200).send("User access updated");
+        return res.status(200).send("User access updated");
       } catch (error) {
         console.error("Error updating Firestore");
-        res.status(500).send("Internal error");
+        return res.status(500).send("Internal error");
       }
       break;
 
