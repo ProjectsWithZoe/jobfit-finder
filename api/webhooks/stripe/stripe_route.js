@@ -44,7 +44,7 @@ export default async function handler(req, res) {
       console.log("Payment completed for: " + userEmail);
 
       try {
-        const q = db.collection("users").where("userId", "==", userEmail);
+        const q = db.collection("users").where("email", "==", userEmail);
         const querySnapshot = await q.get();
 
         if (querySnapshot.empty) {
