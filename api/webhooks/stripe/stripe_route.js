@@ -56,7 +56,7 @@ export default async function handler(req, res) {
           const plan = session.amount_total == 1999 ? "premium" : "pro";
           console.log(plan);
           console.log(session.amount_total);
-          if (event.data.object.amount) {
+          if (session.amount_total > 1998) {
             await doc.ref.set({ subscription: plan }, { merge: true });
             console.log("Updated access for: " + userEmail + "to " + plan);
           }
