@@ -53,8 +53,9 @@ export default async function handler(req, res) {
         }
 
         querySnapshot.forEach(async (doc) => {
-          const plan = session.amount_total === 1999 ? "premium" : "pro";
+          const plan = session.amount_total == 1999 ? "premium" : "pro";
           if (event.data.object.amount == "1999") {
+            console.log(plan);
             await doc.ref.set({ subscription: plan }, { merge: true });
             console.log("Updated access for: " + userEmail);
           } else {
