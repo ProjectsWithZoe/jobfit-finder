@@ -53,7 +53,7 @@ export default async function handler(req, res) {
         }
 
         querySnapshot.forEach(async (doc) => {
-          const plan = session.amount_total == 1999 ? "premium" : "pro";
+          const plan = session.amount_total === 1999 ? "premium" : "pro";
           console.log(plan);
           console.log(session.amount_total);
           if (session.amount_total > 1998) {
