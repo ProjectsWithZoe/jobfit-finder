@@ -340,13 +340,6 @@ export function Hero({ subscription }) {
             learningResources={learningResources}
           />
         )}
-
-      <ResultsPro
-        matchedJobs={matchedJobs}
-        unmatchedJobs={unmatchedJobs}
-        jobRecommendations={tenJobRecommendations}
-        learningResources={learningResources}
-      />
     </>
   );
 }
