@@ -255,16 +255,16 @@ export function ResultsPro({
                             return (
                               <li
                                 key={idx}
-                                className="flex flex-row items-center gap-2"
+                                className="flex flex-row items-center gap-2 text-sm"
                               >
                                 {key}
                                 <a
                                   href={value}
                                   target="_blank"
                                   rel="noopener noreferrer"
-                                  className="text-blue-500 underline"
+                                  className="text-blue-500 underline text-sm"
                                 >
-                                  Link to {key} training
+                                  - Link to {key} training
                                 </a>
                               </li>
                             );
