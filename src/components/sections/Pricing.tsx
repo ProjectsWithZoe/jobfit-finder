@@ -32,7 +32,7 @@ export function Pricing({ isAuthenticated, userEmail }) {
       ],
       buttonText: "Get Premium",
       isPopular: true,
-      paymentLink: "https://buy.stripe.com/test_aEU6qu2rg7HsamQfYY",
+      paymentLink: "https://buy.stripe.com/14kaI96FI3HD3F67ss",
     },
     {
       title: "PRO",
@@ -43,7 +43,7 @@ export function Pricing({ isAuthenticated, userEmail }) {
         "AI-driven career guidance",
       ],
       buttonText: "Get Pro",
-      paymentLink: "https://buy.stripe.com/test_3cs3ei4zoaTEdz23cd",
+      paymentLink: "https://buy.stripe.com/fZe9E52ps6TPfnO6op",
     },
   ];
 
@@ -101,21 +101,23 @@ export function Pricing({ isAuthenticated, userEmail }) {
 
                 {/* Button */}
                 <div className="p-6 pt-0 mt-auto">
-                  <Button
-                    onClick={() => {
-                      console.log(userEmail);
-                    }}
-                    className={`w-full py-5 text-lg font-medium ${
-                      plan.isPopular ? "bg-purple-800 hover:bg-purple-400" : ""
-                    }`}
+                  <a
+                    target="_blank"
+                    href={plan.paymentLink + "?prefilled_email=" + userEmail}
                   >
-                    <a
-                      target="_blank"
-                      href={plan.paymentLink + "?prefilled_email=" + userEmail}
+                    <Button
+                      onClick={() => {
+                        console.log(userEmail);
+                      }}
+                      className={`w-full py-5 text-lg font-medium ${
+                        plan.isPopular
+                          ? "bg-purple-800 hover:bg-purple-400"
+                          : ""
+                      }`}
                     >
                       {plan.buttonText}
-                    </a>
-                  </Button>
+                    </Button>
+                  </a>
                 </div>
               </div>
             </div>
