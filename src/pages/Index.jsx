@@ -19,7 +19,7 @@ const Index = () => {
 
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged((user) => {
-      if (user) {
+      if (user && user.emailVerified) {
         console.log(user.email);
         setIsAuthenticated(true);
         setUserEmail(user.email);
