@@ -47,12 +47,8 @@ export default async function handler(req, res) {
         const q = db.collection("users").where("email", "==", userEmail);
         const querySnapshot = await q.get();
 
-        if (querySnapshot.empty) {
-          console.log("No matching user found");
-          return res.status(404).send("User not found");
-        }
-
-        querySnapshot.forEach(async (doc) => {
+        if (!querySnapshot.empty) {
+          const doc = querySnapshot.docs[0];
           const plan = session.amount_total === 1999 ? "premium" : "pro";
           console.log(plan);
           console.log(session.amount_total);
@@ -60,13 +56,15 @@ export default async function handler(req, res) {
             await doc.ref.set({ subscription: plan }, { merge: true });
             console.log("Updated access for: " + userEmail + "to " + plan);
           }
-        });
+        } else {
+          console.log("No matching user found");
+          return res.status(404).send("User not found");
+        }
         return res.status(200).send("User access updated");
       } catch (error) {
         console.error("Error updating Firestore");
         return res.status(500).send("Internal error");
       }
-      break;
 
     case "payment_intent.succeeded":
       console.log("Payment intent succeeded for: " + event.data.object.amount);
