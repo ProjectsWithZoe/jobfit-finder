@@ -71,7 +71,7 @@ const Index = () => {
     <div className="min-h-screen w-full">
       <Navbar isAuthenticated={isAuthenticated} userEmail={userEmail} />
       <main>
-        <Hero />
+        <Hero subscription={subscription} />
         <Features />
         <Pricing isAuthenticated={isAuthenticated} userEmail={userEmail} />
         <HowItWorks />
