@@ -1,6 +1,7 @@
 import Stripe from "stripe";
 import dotenv from "dotenv";
 import admin from "firebase-admin";
+import { Buffer } from "buffer";
 
 admin.initializeApp({
   credential: admin.credential.cert(
@@ -21,15 +22,18 @@ export default async function handler(req, res) {
   }
   let event;
 
+  const buf = await buffer(req);
   const signature = req.headers["stripe-signature"];
 
   try {
-    event = stripe.webhooks.constructEvent(req.body, signature, endpointSecret);
+    event = stripe.webhooks.constructEvent(buf, signature, endpointSecret);
     console.log("Webhook event successfully verified");
   } catch (error) {
     console.error("Webhook signature verification failed", error.message);
     res.status(400).send("Webhook error", error.message);
   }
+
+  console.log("✅ Success:", event.id);
 
   switch (event.type) {
     case "checkout.session.completed":
