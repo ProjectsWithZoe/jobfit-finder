@@ -163,16 +163,46 @@ export function Navbar({ isAuthenticated, userEmail }) {
             Testimonials
           </a>
           {/*fix mobile nav*/}
-          <a
-            href="#account"
-            className="text-sm font-medium px-4 py-2 hover:bg-primary/10 rounded-md transition-colors"
-            onClick={() => setIsMobileMenuOpen(false)}
-          >
-            Account
-          </a>
-          <Button className="w-full" onClick={() => setIsMobileMenuOpen(false)}>
-            Try Now
-          </Button>
+          {/* Mobile Account Link */}
+          <div className="text-sm font-medium px-4 py-2 rounded-md transition-colors">
+            {isAuthenticated ? (
+              // If logged in, show dropdown for mobile
+              <div className="relative">
+                <button
+                  className="w-full text-left text-sm font-medium hover:text-primary"
+                  onClick={() => setIsDropdownOpen(!isDropdownOpen)}
+                >
+                  Account
+                </button>
+
+                {isDropdownOpen && (
+                  <div className="absolute left-0 mt-2 w-48 bg-white border border-purple-500 rounded-lg shadow-lg">
+                    <div className="px-4 py-2 text-sm text-gray-900">
+                      {userEmail}
+                    </div>
+                    <button className="block w-full text-left px-4 py-2 text-sm text-purple-500 hover:bg-purple-100">
+                      My Subscription
+                    </button>
+                    <button
+                      className="block w-full text-left px-4 py-2 text-sm text-red-500 hover:bg-red-100"
+                      onClick={handleSignOut}
+                    >
+                      Sign Out
+                    </button>
+                  </div>
+                )}
+              </div>
+            ) : (
+              // If not logged in, show login button
+              <Link
+                to="/login"
+                className="block w-full text-left text-sm font-medium hover:text-primary"
+                onClick={() => setIsMobileMenuOpen(false)}
+              >
+                Account
+              </Link>
+            )}
+          </div>
         </div>
       )}
     </nav>
