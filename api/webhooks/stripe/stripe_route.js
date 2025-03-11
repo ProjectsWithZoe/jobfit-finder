@@ -1,7 +1,7 @@
 import Stripe from "stripe";
 import dotenv from "dotenv";
 import admin from "firebase-admin";
-import { Buffer } from "buffer";
+import { buffer } from "micro";
 
 admin.initializeApp({
   credential: admin.credential.cert(
