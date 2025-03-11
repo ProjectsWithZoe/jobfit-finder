@@ -1,9 +1,16 @@
 import Stripe from "stripe";
-import { auth, db } from "../../../src/pages/firebaseAuth.js";
 import dotenv from "dotenv";
+import admin from "firebase-admin";
+
+admin.initializeApp({
+  credential: admin.credential.cert(
+    JSON.parse(process.env.FIREBASE_SERVICE_ACCOUNT)
+  ),
+});
 
 dotenv.config();
 
+const db = admin.firestore();
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
 
 const endpointSecret = process.env.STRIPE_WEBOOK_SECRET;

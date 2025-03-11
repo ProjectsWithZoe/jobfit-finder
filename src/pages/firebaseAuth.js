@@ -10,7 +10,6 @@ import {
   sendPasswordResetEmail,
 } from "firebase/auth";
 
-// Firebase configuration - replace with your own config
 const firebaseConfig = {
   apiKey: import.meta.env.VITE_FIREBASE_apiKey,
   authDomain: import.meta.env.VITE_FIREBASE_authDomain,
