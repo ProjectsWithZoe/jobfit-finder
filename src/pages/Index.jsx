@@ -16,6 +16,7 @@ import { collection, query, where, onSnapshot } from "firebase/firestore";
 const Index = () => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [userEmail, setUserEmail] = useState(null);
+  const [subscription, setSubscription] = useState(null);
 
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged((user) => {
@@ -44,6 +45,7 @@ const Index = () => {
       snapshot.forEach((doc) => {
         if (doc.exists() && doc.data().subscription) {
           console.log(doc.data().subscription);
+          setSubscription(doc.data().subscription);
         }
       });
     });

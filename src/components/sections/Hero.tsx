@@ -7,7 +7,7 @@ import { set } from "react-hook-form";
 import { ResultsPremium } from "@/components/sections/Results";
 import { ResultsPro } from "@/components/sections/Results";
 
-export function Hero() {
+export function Hero({ subscription }) {
   const [isTextareaActive, setIsTextareaActive] = useState(false);
   const [jobDescription, setJobDescription] = useState("");
   const [cv, setCv] = useState("");
@@ -322,22 +322,24 @@ export function Hero() {
         </div>
       </section>
       {/* Add the Results component with data */}
-      {(matchedJobs.length > 0 || unmatchedJobs.length > 0) && (
-        <ResultsPremium
-          matchedJobs={matchedJobs}
-          unmatchedJobs={unmatchedJobs}
-          jobRecommendations={fiveJobRecommendations}
-        />
-      )}
+      {subscription == "premium" &&
+        (matchedJobs.length > 0 || unmatchedJobs.length > 0) && (
+          <ResultsPremium
+            matchedJobs={matchedJobs}
+            unmatchedJobs={unmatchedJobs}
+            jobRecommendations={fiveJobRecommendations}
+          />
+        )}
 
-      {(matchedJobs.length > 0 || unmatchedJobs.length > 0) && (
-        <ResultsPro
-          matchedJobs={matchedJobs}
-          unmatchedJobs={unmatchedJobs}
-          jobRecommendations={tenJobRecommendations}
-          learningResources={learningResources}
-        />
-      )}
+      {subscription == "pro" &&
+        (matchedJobs.length > 0 || unmatchedJobs.length > 0) && (
+          <ResultsPro
+            matchedJobs={matchedJobs}
+            unmatchedJobs={unmatchedJobs}
+            jobRecommendations={tenJobRecommendations}
+            learningResources={learningResources}
+          />
+        )}
     </>
   );
 }
