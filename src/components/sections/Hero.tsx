@@ -249,7 +249,7 @@ export function Hero({ subscription }) {
                         Job Description
                       </label>
                       <textarea
-                        className="min-h-[120px] min-w-[250px] rounded-lg text-sm border transition-all border-primary ring-2 ring-primary/10 glass-input"
+                        className="min-h-[120px] min-w-[250px] rounded-lg text-sm border transition-all ring-4 ring-primary/10 glass-input"
                         placeholder="Job Description here..."
                         onChange={(e) =>
                           setJobDescription(e.target.value.toLowerCase().trim())
@@ -263,7 +263,7 @@ export function Hero({ subscription }) {
                         Your CV
                       </label>
                       <textarea
-                        className="min-h-[120px] min-w-[250px] rounded-lg text-sm border transition-all border-primary ring-2 ring-primary/10 glass-input"
+                        className="min-h-[120px] min-w-[250px] rounded-lg text-sm border transition-all ring-4 ring-primary/10 glass-input"
                         placeholder="CV here..."
                         onChange={(e) =>
                           setCv(e.target.value.toLowerCase().trim())
