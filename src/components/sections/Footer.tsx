@@ -1,5 +1,5 @@
-
-import React from 'react';
+import React from "react";
+import { Link } from "react-router-dom";
 
 export function Footer() {
   const currentYear = new Date().getFullYear();
@@ -13,40 +13,116 @@ export function Footer() {
               <span className="text-primary">Job</span>Fit
             </h3>
             <p className="text-muted-foreground">
-              Matching the right talent with the right opportunities through AI-powered analysis.
+              Matching the right talent with the right opportunities through
+              AI-powered analysis.
             </p>
           </div>
-          
+
           <div>
             <h4 className="font-medium mb-4">Features</h4>
             <ul className="space-y-2">
-              <li><a href="#" className="text-muted-foreground hover:text-primary transition-colors">CV Matching</a></li>
-              <li><a href="#" className="text-muted-foreground hover:text-primary transition-colors">Skill Analysis</a></li>
-              <li><a href="#" className="text-muted-foreground hover:text-primary transition-colors">Job Recommendations</a></li>
-              <li><a href="#" className="text-muted-foreground hover:text-primary transition-colors">Career Insights</a></li>
+              <li>
+                <a
+                  href="#"
+                  className="text-muted-foreground hover:text-primary transition-colors"
+                >
+                  CV Matching
+                </a>
+              </li>
+              <li>
+                <a
+                  href="#"
+                  className="text-muted-foreground hover:text-primary transition-colors"
+                >
+                  Skill Analysis
+                </a>
+              </li>
+              <li>
+                <a
+                  href="#"
+                  className="text-muted-foreground hover:text-primary transition-colors"
+                >
+                  Job Recommendations
+                </a>
+              </li>
+              <li>
+                <a
+                  href="#"
+                  className="text-muted-foreground hover:text-primary transition-colors"
+                >
+                  Career Insights
+                </a>
+              </li>
             </ul>
           </div>
-          
+
           <div>
             <h4 className="font-medium mb-4">Company</h4>
             <ul className="space-y-2">
-              <li><a href="#" className="text-muted-foreground hover:text-primary transition-colors">About Us</a></li>
-              <li><a href="#" className="text-muted-foreground hover:text-primary transition-colors">Careers</a></li>
-              <li><a href="#" className="text-muted-foreground hover:text-primary transition-colors">Blog</a></li>
-              <li><a href="#" className="text-muted-foreground hover:text-primary transition-colors">Contact</a></li>
+              <li>
+                <a
+                  href="#"
+                  className="text-muted-foreground hover:text-primary transition-colors"
+                >
+                  About Us
+                </a>
+              </li>
+              <li>
+                <a
+                  href="#"
+                  className="text-muted-foreground hover:text-primary transition-colors"
+                >
+                  Careers
+                </a>
+              </li>
+              <li>
+                <a
+                  href="#"
+                  className="text-muted-foreground hover:text-primary transition-colors"
+                >
+                  Blog
+                </a>
+              </li>
+              <Link
+                to="/contact"
+                className="text-muted-foreground hover:text-primary transition-colors"
+              >
+                Contact
+              </Link>
             </ul>
           </div>
-          
+
           <div>
             <h4 className="font-medium mb-4">Legal</h4>
             <ul className="space-y-2">
-              <li><a href="#" className="text-muted-foreground hover:text-primary transition-colors">Privacy Policy</a></li>
-              <li><a href="#" className="text-muted-foreground hover:text-primary transition-colors">Terms of Service</a></li>
-              <li><a href="#" className="text-muted-foreground hover:text-primary transition-colors">Cookie Policy</a></li>
+              <li>
+                <a
+                  href="#"
+                  className="text-muted-foreground hover:text-primary transition-colors"
+                >
+                  Privacy Policy
+                </a>
+              </li>
+              <li>
+                <a
+                  href="#"
+                  className="text-muted-foreground hover:text-primary transition-colors"
+                >
+                  Terms of Service
+                </a>
+              </li>
+              <li>
+                <a
+                  href="#"
+                  className="text-muted-foreground hover:text-primary transition-colors"
+                >
+                  Cookie Policy
+                </a>
+              </li>
             </ul>
           </div>
         </div>
-        
+
         <div className="pt-8 border-t text-center">
           <p className="text-muted-foreground">
             © {currentYear} JobFit. All rights reserved.

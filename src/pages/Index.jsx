@@ -11,6 +11,8 @@ import { Pricing } from "@/components/sections/Pricing";
 import { onAuthStateChanged } from "firebase/auth";
 import { auth, db } from "./firebaseAuth";
 import { collection, query, where, onSnapshot } from "firebase/firestore";
+import { Demo } from "../components/sections/Demo";
+import { Contact } from "../components/sections/Contact";
 
 const Index = () => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);

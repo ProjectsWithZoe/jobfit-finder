@@ -1,8 +1,12 @@
 import React from "react";
 import { Button } from "@/components/ui/button";
 import { AnimatedText } from "@/components/ui/AnimatedText";
+import { Link } from "react-router-dom";
 
 export function CallToAction() {
+  const scrollToTop = () => {
+    window.scrollTo({ top: 100, behavior: "smooth" });
+  };
   return (
     <section className="py-24 px-6 relative overflow-hidden">
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-4xl h-[500px] bg-gradient-radial from-primary/20 to-transparent opacity-60 blur-3xl pointer-events-none z-0" />
@@ -23,12 +27,15 @@ export function CallToAction() {
             opportunities that align perfectly with your skills and experience.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Button size="lg" className="px-8">
+            <Button onClick={scrollToTop} size="lg" className="px-8">
               Start Matching Now
             </Button>
-            <Button size="lg" variant="outline">
-              Learn More
-            </Button>
+
+            <Link to="/features">
+              <Button size="lg" variant="outline">
+                Learn More
+              </Button>
+            </Link>
           </div>
         </div>
       </div>

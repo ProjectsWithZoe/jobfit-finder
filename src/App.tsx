@@ -10,6 +10,9 @@ import { ResetPassword } from "./pages/ResetPassword";
 import { Analytics } from "@vercel/analytics/react";
 import Index from "./pages/Index";
 import NotFound from "./pages/NotFound";
+import { Contact } from "@/components/sections/Contact";
+
+import { Features } from "@/components/sections/Features";
 
 function App() {
   const queryClient = new QueryClient();
@@ -28,8 +31,10 @@ function App() {
             <Route path="/login" element={<Login />} />
             {/*<Route path="/sign-in" element={<SignIn />} />
           <Route path="/sign-up" element={<SignUp />} />*/}
+            <Route path="/features" element={<Features />} />
             <Route path="/forgot-password" element={<ForgotPassword />} />
             <Route path="/reset-password" element={<ResetPassword />} />
+            <Route path="/contact" element={<Contact />} />
           </Routes>
         </BrowserRouter>
       </TooltipProvider>

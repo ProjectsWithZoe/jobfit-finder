@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { AnimatedText } from "@/components/ui/AnimatedText";
 import { PercentageDisplay } from "@/components/ui/PercentageDisplay";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { set } from "react-hook-form";
 import { ResultsPremium } from "@/components/sections/Results";
 import { ResultsPro } from "@/components/sections/Results";
@@ -188,9 +188,13 @@ export function Hero({ subscription }) {
     };
   }, [cv]);
 
+  const scrollToTop = () => {
+    window.scrollTo({ top: 100, behavior: "smooth" });
+  };
+
   return (
     <>
-      <section className="pt-32 pb-24 px-6 relative overflow-hidden">
+      <section className="pt-32 pb-16 px-6 relative overflow-hidden">
         <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-4xl h-[500px] bg-gradient-radial from-primary/20 to-transparent opacity-60 blur-3xl pointer-events-none z-0" />
 
         <div className="max-w-7xl mx-auto relative z-10">
@@ -221,14 +225,15 @@ export function Hero({ subscription }) {
               </p>
 
               <div className="flex flex-col sm:flex-row gap-4 sm:items-center justify-center lg:justify-start animate-fade-in">
-                <a className="flex" href="#jobDesc">
-                  <Button size="lg" className="w-full px-12">
-                    Try It Free
-                  </Button>
-                </a>
-                <Button size="lg" variant="outline">
-                  Learn More
+                <Button onClick={scrollToTop} size="lg" className=" px-12">
+                  Try It Free
                 </Button>
+
+                <Link to="/features">
+                  <Button size="lg" variant="outline">
+                    Learn More
+                  </Button>
+                </Link>
               </div>
             </div>
 
