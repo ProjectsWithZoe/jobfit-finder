@@ -37,7 +37,7 @@ export default async function handler(req, res) {
 
   switch (event.type) {
     case "checkout.session.completed":
-      fbq('track', 'Purchase');
+      
       const session = await stripe.checkout.sessions.retrieve(
         event.data.object.id
       );
