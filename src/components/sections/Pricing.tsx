@@ -107,6 +107,9 @@ export function Pricing({ isAuthenticated, userEmail }) {
                   >
                     <Button
                       onClick={() => {
+                        
+  fbq('track', 'InitiateCheckout');
+
                         console.log(userEmail);
                       }}
                       className={`w-full py-5 text-lg font-medium ${
