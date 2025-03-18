@@ -172,7 +172,13 @@ export function Navbar({ isAuthenticated, userEmail }) {
           >
             Testimonials
           </a>
-          {/*fix mobile nav*/}
+          <Link
+            to="/demo"
+            className="text-sm font-medium px-4 py-2 hover:bg-primary/10 rounded-md transition-colors"
+          >
+            Demo
+          </Link>
+
           {/* Mobile Account Link */}
           <div className="text-sm font-medium px-4 py-2 rounded-md transition-colors">
             {isAuthenticated ? (

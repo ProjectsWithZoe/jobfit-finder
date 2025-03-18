@@ -2,11 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
 
 export function Demo() {
-  const images = [
-    "/public/demo1.png",
-    "/public/demo2.png",
-    "/public/demo3.png",
-  ];
+  const images = ["/demo1.png", "/demo2.png", "/demo3.png"];
   return (
     <>
       {/*<section className="pt-32 flex flex-row pb-24 px-6 relative overflow-hidden">
