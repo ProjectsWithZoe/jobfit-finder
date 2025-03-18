@@ -76,6 +76,12 @@ export function Navbar({ isAuthenticated, userEmail }) {
           >
             Testimonials
           </a>
+          <Link
+            to="/demo"
+            className="text-sm font-medium hover:text-primary transition-colors"
+          >
+            Demo
+          </Link>
           {/* Account Button */}
           <div className="relative">
             {isAuthenticated ? (

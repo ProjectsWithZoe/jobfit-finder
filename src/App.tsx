@@ -13,6 +13,7 @@ import NotFound from "./pages/NotFound";
 import { Contact } from "@/components/sections/Contact";
 
 import { Features } from "@/components/sections/Features";
+import { Demo } from "@/components/sections/Demo";
 
 function App() {
   const queryClient = new QueryClient();
@@ -58,6 +59,7 @@ function App() {
             <Route path="/forgot-password" element={<ForgotPassword />} />
             <Route path="/reset-password" element={<ResetPassword />} />
             <Route path="/contact" element={<Contact />} />
+            <Route path="/demo" element={<Demo />} />
           </Routes>
         </BrowserRouter>
       </TooltipProvider>
